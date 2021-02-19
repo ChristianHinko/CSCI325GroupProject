@@ -33,8 +33,7 @@ public class Program
         
         // TESTING:
         AlgebraCalculator algebraCalc = new AlgebraCalculator();
-        algebraCalc.SetQuadratic("-1x^2 + 1x - 1");
-        System.out.println(algebraCalc.GetQuadratic());
+        algebraCalc.SetQuadratic("x^2 + 6x + 5");
         
         algebraCalc.PrintCoefficients();
         

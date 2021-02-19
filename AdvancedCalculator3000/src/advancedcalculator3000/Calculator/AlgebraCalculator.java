@@ -127,7 +127,16 @@ public class AlgebraCalculator implements ICalculator
      *  - "1x^2 + 1x + 1"
      *  - "2x^2 + 4x + 2"
      *  - "x^2 + 2x + 1"
-     *  - "0x^2 + 0x + x"
+     *  - "x^2+x+1"
+     *  - "-x^2 - x - 1"
+     * Examples of formats that won't work:
+     *  - "x + x^2 + 1"         // terms are not in order from highest degree to lowest
+     * 
+     * 
+     * // TODO: how would these work?:
+     *  - "0x^2 + 0x + 0"
+     *  - "0x^2 + 1x + 1"
+     *  - "x^2 + 0x + 1"
      */
     public void SetQuadratic(String newQuadratic)
     {
@@ -210,13 +219,14 @@ public class AlgebraCalculator implements ICalculator
     {
         int aCoeff = 1;
         int bCoeff = 1;
-        int cCoeff = 1;
+        int cCoeff = 0;
         
+        // Find coeffs
         {
-            int itterations = 0; // to keep track of which itteration we are on
+            int itteration = 0; // to keep track of which itteration we are on
             
             // For each x in the quadratic (plus the hanging coeficient C), find its coefficient
-            for (int xIndex = quadratic.indexOf('x'); xIndex < quadratic.length() && itterations <= 2; xIndex = quadratic.indexOf('x', xIndex + 1))
+            for (int xIndex = quadratic.indexOf('x'); xIndex < quadratic.length() && itteration <= 2; xIndex = quadratic.indexOf('x', xIndex + 1))
             {
                 if (xIndex == -1) // this mean that we are the C coefficient
                 {
@@ -225,6 +235,10 @@ public class AlgebraCalculator implements ICalculator
                 }
 
                 int currentCoefficient = 1;
+                if (itteration >= 2)
+                {
+                    currentCoefficient = 0;
+                }
 
                 // Build coefficient
                 {
@@ -257,7 +271,7 @@ public class AlgebraCalculator implements ICalculator
                     }
                 }
 
-                switch (itterations)
+                switch (itteration)
                 {
                     case 0:
                         aCoeff = currentCoefficient;
@@ -270,7 +284,7 @@ public class AlgebraCalculator implements ICalculator
                         break;
                 }
 
-                ++itterations;
+                ++itteration;
             }
         }
         

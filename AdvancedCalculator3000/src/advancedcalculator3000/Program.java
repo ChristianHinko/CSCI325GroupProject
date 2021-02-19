@@ -23,11 +23,21 @@ public class Program
         // TODO: code application logic here
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        // TESTING:
         AlgebraCalculator algebraCalc = new AlgebraCalculator();
-        //algebraCalc.SetQuadratic("2x^2 + 4x + 1");
+        algebraCalc.SetQuadratic("x^2 + 2x + 1");
         
         algebraCalc.PrintCoefficients();
         
-        System.out.println(algebraCalc.FactorQuadratic());
+        algebraCalc.QuadraticFormula();
+        algebraCalc.PrintX();
     }
 }

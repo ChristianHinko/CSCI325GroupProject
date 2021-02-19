@@ -19,6 +19,9 @@ public class AlgebraCalculator implements ICalculator
     private int bCoefficient;
     private int cCoefficient;
     
+    private double x1;
+    private double x2;
+    
     public AlgebraCalculator()
     {
         quadratic = "x^2 + x + 1";
@@ -33,11 +36,49 @@ public class AlgebraCalculator implements ICalculator
         //System.out.println("'r' - Square root");
     }
     
+    public void QuadraticFormula()
+    {
+        double discriminant = Math.pow(bCoefficient, 2) - (4 * (aCoefficient * cCoefficient));
+        
+        if (discriminant > 0)
+        {
+            x1 = (-bCoefficient + Math.sqrt(discriminant)) / (2 * aCoefficient);
+            x2 = (-bCoefficient - Math.sqrt(discriminant)) / (2 * aCoefficient);
+        }
+        else if (discriminant == 0)
+        {
+            x1 = (-bCoefficient) / (2 * aCoefficient);
+            x2 = (-bCoefficient) / (2 * aCoefficient);
+        }
+        else
+        {
+            
+        }
+    }
+    
+    public String FactorQuadratic()
+    {
+        
+        
+        return "";
+    }
+    
     public String GetQuadratic() { return quadratic; }
     public void SetQuadratic(String newQuadratic)
     {
         quadratic = newQuadratic;
         UpdateCoefficients();
+    }
+    
+    public void PrintX()
+    {
+        System.out.print("x = " + x1);
+        if (x1 != x2)
+        {
+            System.out.print(", or x = " + x2);
+        }
+        
+        System.out.println("");
     }
     
     public void PrintCoefficients()
@@ -103,9 +144,5 @@ public class AlgebraCalculator implements ICalculator
         aCoefficient = aCoeff;
         bCoefficient = bCoeff;
         cCoefficient = cCoeff;
-    }
-    public String FactorQuadratic()
-    {
-        return "";
     }
 }

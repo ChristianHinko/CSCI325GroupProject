@@ -162,12 +162,15 @@ public class AlgebraCalculator implements ICalculator
         int cCoeff = 1;
         
         {
-            int itterations = 0;
-            for (int xIndex = quadratic.indexOf('x'); xIndex < quadratic.length(); xIndex = quadratic.indexOf('x', xIndex + 1))
+            int itterations = 0; // to keep track of which itteration we are on
+            
+            // For each x in the quadratic (plus the hanging coeficient C), find its coefficient
+            for (int xIndex = quadratic.indexOf('x'); xIndex < quadratic.length() && itterations <= 2; xIndex = quadratic.indexOf('x', xIndex + 1))
             {
-                if (xIndex == -1)
+                if (xIndex == -1) // this mean that we are the C coefficient
                 {
-                    break;
+                    // Treat this as the others by setting xIndex to the index after the coefficient
+                    xIndex = quadratic.length();
                 }
 
                 int currentCoefficient = 1;

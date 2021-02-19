@@ -113,13 +113,21 @@ public class AlgebraCalculator implements ICalculator
         return retVal;
     }
     
-    public String GetQuadratic() { return quadratic; }
+    /**
+     * Follows the format: "ax^2 + bx + c".
+     * Examples of viable formats:
+     *  - "x^2 + x + 1"
+     *  - "1x^2 + 1x + 1"
+     *  - "2x^2 + 4x + 2"
+     *  - "x^2 + 2x + 1"
+     */
     public void SetQuadratic(String newQuadratic)
     {
         quadratic = newQuadratic;
         UpdateCoefficients();
         QuadraticFormula();
     }
+    public String GetQuadratic() { return quadratic; }
     
     public void PrintX()
     {

@@ -138,10 +138,10 @@ public class AlgebraCalculator implements ICalculator
     
     public void PrintX()
     {
-        System.out.print("x = " + x1);
+        System.out.print("x = " + (int)x1);
         if (x1 != x2)
         {
-            System.out.print(", or x = " + x2);
+            System.out.print(", or x = " + (int)x2);
         }
         
         System.out.println("");

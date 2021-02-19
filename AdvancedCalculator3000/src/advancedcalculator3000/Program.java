@@ -33,7 +33,7 @@ public class Program
         
         // TESTING:
         AlgebraCalculator algebraCalc = new AlgebraCalculator();
-        algebraCalc.SetQuadratic("x^2 + 2x + 1");
+        algebraCalc.SetQuadratic("x^2 + 6x + 5"); // TODO: we don't support negative coefficients yet
         
         algebraCalc.PrintCoefficients();
         

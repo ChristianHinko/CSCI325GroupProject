@@ -88,25 +88,32 @@ public class AlgebraCalculator implements ICalculator
             // This is its most simplified form
             return quadratic;
         }
+        if ((x1 % 1) != 0 || (x2 % 1) != 0) // if x1 or x2 have decimals or not
+        {
+            // This is its most simplified form
+            return quadratic;
+        }
         
         // Build (x - x1)
+        int x1Whole = (int)x1;
         if (x1 > 0)
         {
-            retVal += "(x - " + x1 + ")";
+            retVal += "(x - " + x1Whole + ")";
         }
         else
         {
-            retVal += "(x + " + Math.abs(x1) + ")";
+            retVal += "(x + " + Math.abs(x1Whole) + ")";
         }
         
         // Build (x - x2)
+        int x2Whole = (int)x2;
         if (x2 > 0)
         {
-            retVal += "(x - " + x2 + ")";
+            retVal += "(x - " + x2Whole + ")";
         }
         else
         {
-            retVal += "(x + " + Math.abs(x2) + ")";
+            retVal += "(x + " + Math.abs(x2Whole) + ")";
         }
         
         // Return result

@@ -6,21 +6,38 @@
 package advancedcalculator3000.Calculator;
 
 /**
+ * Performs algebra-based math calculations
  * 
  * @author Christian Hinkle
  */
 public class AlgebraCalculator implements ICalculator
 {
-    // ex: "2x^2 + x + 1"
-    // ex: " x^2 + x + 1"
-    // ex: "1x^2 + x + 1"
+    /**
+     * A quadratic expression in string form.
+     * The purpose of this is for easy end user interaction with this calculator and
+     * really just exists to get the values of the coefficients a, b, and c from the user.
+     * 
+     * AVOID DIRECTLY SETTING!! (Use the setter instead so that our coefficients get updated)
+     * 
+     * Follows the format: "ax^2 + bx + c".
+     * Examples of viable formats:
+     *  - "x^2 + x + 1"
+     *  - "1x^2 + 1x + 1"
+     *  - "2x^2 + 4x + 2"
+     *  - "x^2 + 2x + 1"
+     */
     private String quadratic;
+    
+    // A, B, and C coefficients of our quadratic (what really drives the calculations):
     private int aCoefficient;
     private int bCoefficient;
     private int cCoefficient;
     
+    /** Value of x of the quadratic to fulfill the quadratic formula. */
     private double x1;
+    /** Secondary value of x of the quadratic to fulfill quadratic formula (not always necessary because it's sometimes the same as x1). */
     private double x2;
+    
     
     public AlgebraCalculator()
     {
@@ -36,6 +53,9 @@ public class AlgebraCalculator implements ICalculator
         //System.out.println("'r' - Square root");
     }
     
+    /**
+     * Finds the value of x and stores it into x1 and x2.
+     */
     public void QuadraticFormula()
     {
         double discriminant = Math.pow(bCoefficient, 2) - (4 * (aCoefficient * cCoefficient));
@@ -56,6 +76,9 @@ public class AlgebraCalculator implements ICalculator
         }
     }
     
+    /**
+     *                                            TODO: implement (should return a string of the quadratic in factored form)     * 
+     */
     public String FactorQuadratic()
     {
         
@@ -85,6 +108,10 @@ public class AlgebraCalculator implements ICalculator
     {
         System.out.println("a: " + aCoefficient + ", b: " + bCoefficient + ", c: " + cCoefficient);
     }
+    
+    /**
+     * Updates A, B, and C coefficients to match those of our quadratic.
+     */
     private void UpdateCoefficients()
     {
         int aCoeff = 1;

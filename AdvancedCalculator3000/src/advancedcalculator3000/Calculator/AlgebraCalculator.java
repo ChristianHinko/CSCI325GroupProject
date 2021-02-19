@@ -183,10 +183,19 @@ public class AlgebraCalculator implements ICalculator
                     {
                         if (Character.isDigit(quadratic.charAt(i)))
                         {
-                            coeStr += quadratic.charAt(i);
+                            coeStr = quadratic.charAt(i) + coeStr;
                         }
                         else
                         {
+                            if (quadratic.charAt(i) == ' ')
+                            {
+                                continue;
+                            }
+                            
+                            if (quadratic.charAt(i) == '-')
+                            {
+                                coeStr = "-" + coeStr;
+                            }
                             break;
                         }
                     }

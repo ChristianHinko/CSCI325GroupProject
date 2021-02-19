@@ -88,36 +88,143 @@ public class AlgebraCalculator implements ICalculator
             // This is its most simplified form
             return quadratic;
         }
-        if ((x1 % 1) != 0 || (x2 % 1) != 0) // if x1 or x2 have decimals or not
+        if ((x1 % 1) != 0 || (x2 % 1) != 0) // if x1 or x2 have decimals or not         TODO: actually some are ok to have decimals sometimes figure this out
         {
             // This is its most simplified form
             return quadratic;
         }
         
-        // Build (x - x1)
-        int x1Whole = (int)x1;
-        if (x1 > 0)
+        
+        
+        // These are what we are trying to calculate. To return them as: GCD(coeffOne*x + constOne)(coeffTwo*x + constTwo)
+        int GCD = 0;
+        int coeffOne = 0;
+        int constOne = 0;
+        int coeffTwo = 0;
+        int constTwo = 0;
+        
+        
+        // Find the GCD of all coefficients
+        GCD = GreatestCommonDivisor(Math.abs(aCoefficient), GreatestCommonDivisor(Math.abs(bCoefficient), Math.abs(cCoefficient)));
+        
+        // Get the most factored forms of our coefficients
+        int factoredA = aCoefficient;
+        int factoredB = bCoefficient;
+        int factoredC = cCoefficient;
+        
+        // Reduce our coefficients by their factor if we can
+        if (GCD != 0)
         {
-            retVal += "(x - " + x1Whole + ")";
+            factoredA /= GCD;
+            factoredB /= GCD;
+            factoredC /= GCD;
+        }
+        
+        // Find the correct values for our constants (we want constOne and constTwo to multiply to A*C but add to B).
+        // We are about to brute force this using a while-loop and check every possible product of the 2 until both of them add to B.
+        {
+            // We want (constOne * constTwo) to equal this
+            int desiredProduct = factoredA * factoredC;
+            
+            // Loop until constTwo and constOne not only multiply to our desired product, but add to the factored form of B
+            int currentSum = 0;
+            while (currentSum != factoredB)
+            {
+                // Increment constTwo in attempt to find a value that works
+                ++constTwo;
+                
+                // Make constOne times constTwo become our desired result
+                constOne = desiredProduct / constTwo;
+                
+                // If constOne is a whole number (if it evenly divided into our desiredProduct)
+                // then this constant might work! Get the sum of the two so we can check if they
+                // will add to factoredB
+                if ((constOne % 1) == 0)
+                {
+                    currentSum = constOne + constTwo;
+                }
+            }
+        }
+        
+        // Calculate our first factor
+        {
+            coeffOne = factoredA;
+            int divisorOne = GreatestCommonDivisor(Math.abs(constOne), Math.abs(coeffOne)); 
+            
+            constOne /= divisorOne;
+            coeffOne /= divisorOne;
+        }
+        
+        // Calculate our second factor
+        {
+            coeffTwo = factoredA;
+            int divisorTwo = GreatestCommonDivisor(Math.abs(constTwo), Math.abs(coeffTwo));
+            
+            constTwo /= divisorTwo;
+            coeffTwo /= divisorTwo;
+        }
+        
+        
+        // Build our factors:
+        
+        
+        
+        // Build factor one (coeffOne + constOne)
+        String factorOne = "(";
+        if (coeffOne != 1)
+        {
+            factorOne += coeffOne;
+        }
+        factorOne += "x ";
+        if (constOne >= 0)
+        {
+            factorOne += "+ ";
         }
         else
         {
-            retVal += "(x + " + Math.abs(x1Whole) + ")";
+            factorOne += "- ";
         }
+        factorOne += Math.abs(constOne) + ")";
         
-        // Build (x - x2)
-        int x2Whole = (int)x2;
-        if (x2 > 0)
+        // Build factor two (coeffTwo + constTwo)
+        String factorTwo = "(";
+        if (coeffTwo != 1)
         {
-            retVal += "(x - " + x2Whole + ")";
+            factorTwo += coeffTwo;
+        }
+        factorTwo += "x ";
+        if (constTwo >= 0)
+        {
+            factorTwo += "+ ";
         }
         else
         {
-            retVal += "(x + " + Math.abs(x2Whole) + ")";
+            factorTwo += "- ";
         }
+        factorTwo += Math.abs(constTwo) + ")";
         
-        // Return result
+        
+        // Put our greatest common devisor in front of everything
+        if (GCD != 1)
+        {
+            retVal += "" + GCD;
+        }
+        retVal += factorOne;
+        retVal += factorTwo;
+        
+        
+        // Return our factored expression
         return retVal;
+    }
+    
+    public static int GreatestCommonDivisor(int numA, int numB)
+    {
+        if (numB == 0)
+        {
+            return numA;
+        }
+        
+        return GreatestCommonDivisor(numB, (numA % numB));
     }
     
     /**

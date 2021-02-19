@@ -127,14 +127,65 @@ public class AlgebraCalculator implements ICalculator
      *  - "1x^2 + 1x + 1"
      *  - "2x^2 + 4x + 2"
      *  - "x^2 + 2x + 1"
+     *  - "0x^2 + 0x + x"
      */
     public void SetQuadratic(String newQuadratic)
     {
         quadratic = newQuadratic;
         UpdateCoefficients();
+        CleanUpQuadratic();
         QuadraticFormula();
     }
     public String GetQuadratic() { return quadratic; }
+    
+    /**
+     * Rebuilds the quadratic string into the most minimal, user-friendly form.
+     */
+    public void CleanUpQuadratic()
+    {
+        quadratic = "";
+        
+        // BUILD ax^2
+        if (aCoefficient < 0)
+        {
+            quadratic += "-";
+        }
+        if (Math.abs(aCoefficient) != 1)
+        {
+            quadratic += Math.abs(aCoefficient);
+        }
+        quadratic += "x^2 ";
+        // END ax^2
+        
+        // BUILD bx
+        if (bCoefficient >= 0)
+        {
+            quadratic += "+ ";
+        }
+        else
+        {
+            quadratic += "- ";
+        }
+        if (Math.abs(bCoefficient) != 1)
+        {
+            quadratic += Math.abs(bCoefficient);
+        }
+        quadratic += "x ";
+        // END bx
+        
+        // BUILD c
+        if (cCoefficient >= 0)
+        {
+            quadratic += "+ ";
+        }
+        else
+        {
+            quadratic += "- ";
+        }
+        quadratic += Math.abs(cCoefficient);
+        // END c
+    }
+    
     
     public void PrintX()
     {

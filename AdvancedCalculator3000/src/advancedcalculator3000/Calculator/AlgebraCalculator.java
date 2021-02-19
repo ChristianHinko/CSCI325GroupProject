@@ -72,7 +72,7 @@ public class AlgebraCalculator implements ICalculator
         }
         else
         {
-            
+            // TODO: complex solution (how should we handle this? add booleans for x1 and x2 about whether they are imaginary or not?)
         }
     }
     

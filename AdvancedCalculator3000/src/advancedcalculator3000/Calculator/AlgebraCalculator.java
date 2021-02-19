@@ -41,8 +41,7 @@ public class AlgebraCalculator implements ICalculator
     
     public AlgebraCalculator()
     {
-        quadratic = "x^2 + x + 1";
-        UpdateCoefficients();
+        SetQuadratic("x^2 + x + 1");
     }
     
     @Override
@@ -77,13 +76,41 @@ public class AlgebraCalculator implements ICalculator
     }
     
     /**
-     *                                            TODO: implement (should return a string of the quadratic in factored form)     * 
+     * Returns a string of the quadratic in its factored form.
+     * If unable to factor any further, returns the quadratic itself.
      */
     public String FactorQuadratic()
     {
+        String retVal = "";
         
+        if (x1 == x2)
+        {
+            // This is its most simplified form
+            return quadratic;
+        }
         
-        return "";
+        // Build (x - x1)
+        if (x1 > 0)
+        {
+            retVal += "(x - " + x1 + ")";
+        }
+        else
+        {
+            retVal += "(x + " + Math.abs(x1) + ")";
+        }
+        
+        // Build (x - x2)
+        if (x2 > 0)
+        {
+            retVal += "(x - " + x2 + ")";
+        }
+        else
+        {
+            retVal += "(x + " + Math.abs(x2) + ")";
+        }
+        
+        // Return result
+        return retVal;
     }
     
     public String GetQuadratic() { return quadratic; }
@@ -91,6 +118,7 @@ public class AlgebraCalculator implements ICalculator
     {
         quadratic = newQuadratic;
         UpdateCoefficients();
+        QuadraticFormula();
     }
     
     public void PrintX()

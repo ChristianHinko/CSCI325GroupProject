@@ -11,7 +11,19 @@ package advancedcalculator3000.Calculator;
  */
 public class AlgebraCalculator implements ICalculator
 {
+    // ex: "2x^2 + x + 1"
+    // ex: " x^2 + x + 1"
+    // ex: "1x^2 + x + 1"
     private String quadratic;
+    private int aCoefficient;
+    private int bCoefficient;
+    private int cCoefficient;
+    
+    public AlgebraCalculator()
+    {
+        quadratic = "x^2 + x + 1";
+        UpdateCoefficients();
+    }
     
     @Override
     public void PrintCalculationsMenu()
@@ -21,27 +33,79 @@ public class AlgebraCalculator implements ICalculator
         //System.out.println("'r' - Square root");
     }
     
-    public String FactorQuadratic()
+    public String GetQuadratic() { return quadratic; }
+    public void SetQuadratic(String newQuadratic)
     {
-        int a = 0;
-        int b = 0;
-        int c = 0;
+        quadratic = newQuadratic;
+        UpdateCoefficients();
+    }
+    
+    public void PrintCoefficients()
+    {
+        System.out.println("a: " + aCoefficient + ", b: " + bCoefficient + ", c: " + cCoefficient);
+    }
+    private void UpdateCoefficients()
+    {
+        int aCoeff = 1;
+        int bCoeff = 1;
+        int cCoeff = 1;
         
-        // ex: "2x^2 + x + 1"
-        // ex: " x^2 + x + 1"
-        // ex: "1x^2 + x + 1"
-        for (int i = 0; i < quadratic.length(); ++i)
         {
-            char currentChar = quadratic.charAt(i);
-            
-            if (Character.isDigit(currentChar))
+            int itterations = 0;
+            for (int xIndex = quadratic.indexOf('x'); xIndex < quadratic.length(); xIndex = quadratic.indexOf('x', xIndex + 1))
             {
-                int coefficient = Integer.parseInt("" + currentChar);
-                
-                
+                if (xIndex == -1)
+                {
+                    break;
+                }
+
+                int currentCoefficient = 1;
+
+                // Build coefficient
+                {
+                    String coeStr = "";
+
+                    for (int i = xIndex - 1; i >= 0; --i)
+                    {
+                        if (Character.isDigit(quadratic.charAt(i)))
+                        {
+                            coeStr += quadratic.charAt(i);
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+
+                    if (coeStr.length() > 0)
+                    {
+                        currentCoefficient = Integer.parseInt(coeStr);
+                    }
+                }
+
+                switch (itterations)
+                {
+                    case 0:
+                        aCoeff = currentCoefficient;
+                        break;
+                    case 1:
+                        bCoeff = currentCoefficient;
+                        break;
+                    case 2:
+                        cCoeff = currentCoefficient;
+                        break;
+                }
+
+                ++itterations;
             }
         }
         
+        aCoefficient = aCoeff;
+        bCoefficient = bCoeff;
+        cCoefficient = cCoeff;
+    }
+    public String FactorQuadratic()
+    {
         return "";
     }
 }

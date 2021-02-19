@@ -5,6 +5,11 @@
  */
 package advancedcalculator3000;
 
+
+import advancedcalculator3000.Calculator.AlgebraCalculator;
+
+
+
 /**
  * 
  */
@@ -15,6 +20,14 @@ public class Program
      */
     public static void main(String[] args)
     {
-        // TODO code application logic here
+        // TODO: code application logic here
+        
+        
+        AlgebraCalculator algebraCalc = new AlgebraCalculator();
+        //algebraCalc.SetQuadratic("2x^2 + 4x + 1");
+        
+        algebraCalc.PrintCoefficients();
+        
+        System.out.println(algebraCalc.FactorQuadratic());
     }
 }

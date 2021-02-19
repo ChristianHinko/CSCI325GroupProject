@@ -43,6 +43,10 @@ public class AlgebraCalculator implements ICalculator
     {
         SetQuadratic("x^2 + x + 1");
     }
+    public AlgebraCalculator(int a, int b, int c)
+    {
+        SetQuadratic("" + a + "x^2 + " + b + "x + " + c);
+    }
     
     @Override
     public void PrintCalculationsMenu()
@@ -83,18 +87,6 @@ public class AlgebraCalculator implements ICalculator
     {
         String retVal = "";
         
-        if (x1Val == x2Val)
-        {
-            // This is its most simplified form
-            return quadratic;
-        }
-        if ((x1Val % 1) != 0 || (x2Val % 1) != 0) // if x1 or x2 have decimals or not         TODO: actually some are ok to have decimals sometimes figure this out
-        {
-            // This is its most simplified form
-            return quadratic;
-        }
-        
-        
         
         // These are what we are trying to calculate. To return them as: GCD(coeffOne*x + constOne)(coeffTwo*x + constTwo)
         int GCD = 0;
@@ -120,6 +112,7 @@ public class AlgebraCalculator implements ICalculator
             factoredC /= GCD;
         }
         
+        
         // Find the correct values for our constants (we want constOne and constTwo to multiply to A*C but add to B).
         // We are about to brute force this using a while-loop and check every possible product of the 2 until both of them add to B.
         {
@@ -142,6 +135,20 @@ public class AlgebraCalculator implements ICalculator
                 if ((constOne % 1) == 0)
                 {
                     currentSum = constOne + constTwo;
+                }
+                
+                // If there are not more attempts that have a possiblity to work. We have exhausted all retries. 
+                if (constTwo > Math.abs(desiredProduct))
+                {
+                    if (GCD != 1)
+                    {
+                        // At least return a GCD factored quadratic
+                        AlgebraCalculator factoredByGcdOnly = new AlgebraCalculator(factoredA, factoredB, factoredC);
+                        return "" + GCD + "(" + factoredByGcdOnly.GetQuadratic() + ")";
+                    }
+                    
+                    // We don't have anything useful to factor, just return the quadratic
+                    return quadratic;
                 }
             }
         }
@@ -253,6 +260,9 @@ public class AlgebraCalculator implements ICalculator
         QuadraticFormula();
     }
     public String GetQuadratic() { return quadratic; }
+    
+    public double GetX1Val() { return x1Val; }
+    public double GetX2Val() { return x2Val; }
     
     /**
      * Rebuilds the quadratic string into the most minimal, user-friendly form.

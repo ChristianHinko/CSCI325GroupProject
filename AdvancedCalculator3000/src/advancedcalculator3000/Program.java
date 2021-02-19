@@ -33,7 +33,7 @@ public class Program
         
         // TESTING:
         AlgebraCalculator algebraCalc = new AlgebraCalculator();
-        algebraCalc.SetQuadratic("2x^2 + 7x - 4");
+        algebraCalc.SetQuadratic("2x^2 + 14x - 8");
         
         algebraCalc.PrintCoefficients();
         

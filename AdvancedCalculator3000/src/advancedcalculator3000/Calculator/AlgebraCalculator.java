@@ -34,9 +34,9 @@ public class AlgebraCalculator implements ICalculator
     private int cCoefficient;
     
     /** Value of x of the quadratic to fulfill the quadratic formula. */
-    private double x1;
+    private double x1Val;
     /** Secondary value of x of the quadratic to fulfill quadratic formula (not always necessary because it's sometimes the same as x1). */
-    private double x2;
+    private double x2Val;
     
     
     public AlgebraCalculator()
@@ -61,13 +61,13 @@ public class AlgebraCalculator implements ICalculator
         
         if (discriminant > 0)
         {
-            x1 = (-bCoefficient + Math.sqrt(discriminant)) / (2 * aCoefficient);
-            x2 = (-bCoefficient - Math.sqrt(discriminant)) / (2 * aCoefficient);
+            x1Val = (-bCoefficient + Math.sqrt(discriminant)) / (2 * aCoefficient);
+            x2Val = (-bCoefficient - Math.sqrt(discriminant)) / (2 * aCoefficient);
         }
         else if (discriminant == 0)
         {
-            x1 = (-bCoefficient) / (2 * aCoefficient);
-            x2 = (-bCoefficient) / (2 * aCoefficient);
+            x1Val = (-bCoefficient) / (2 * aCoefficient);
+            x2Val = (-bCoefficient) / (2 * aCoefficient);
         }
         else
         {
@@ -83,12 +83,12 @@ public class AlgebraCalculator implements ICalculator
     {
         String retVal = "";
         
-        if (x1 == x2)
+        if (x1Val == x2Val)
         {
             // This is its most simplified form
             return quadratic;
         }
-        if ((x1 % 1) != 0 || (x2 % 1) != 0) // if x1 or x2 have decimals or not         TODO: actually some are ok to have decimals sometimes figure this out
+        if ((x1Val % 1) != 0 || (x2Val % 1) != 0) // if x1 or x2 have decimals or not         TODO: actually some are ok to have decimals sometimes figure this out
         {
             // This is its most simplified form
             return quadratic;
@@ -303,12 +303,24 @@ public class AlgebraCalculator implements ICalculator
     }
     
     
-    public void PrintX()
+    public void PrintXVals()
     {
-        System.out.print("x = " + (int)x1);
-        if (x1 != x2)
+        String x1Str = "" + x1Val;
+        if (x1Val % 1 == 0)
         {
-            System.out.print(", or x = " + (int)x2);
+            x1Str = "" + (int)x1Val;
+        }
+        System.out.print("x = " + x1Str);
+        
+        // If we have a second solution
+        if (x1Val != x2Val)
+        {
+            String x2Str = "" + x2Val;
+            if (x2Val % 1 == 0)
+            {
+                x2Str = "" + (int)x2Val;
+            }
+            System.out.print(", or x = " + x2Str);
         }
         
         System.out.println("");

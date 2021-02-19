@@ -37,7 +37,7 @@ public class Program
         
         algebraCalc.PrintCoefficients();
         
-        algebraCalc.PrintX();
+        algebraCalc.PrintXVals();
         
         String factored = algebraCalc.FactorQuadratic();
         System.out.println(factored);

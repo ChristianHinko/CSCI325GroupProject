@@ -43,8 +43,8 @@ public class Program
 //            algebraCalc.HandleUserMenu(scanner);
 //        }
         
-        //algebraCalc.SetQuadratic("4x^2 + 14x - 8");
-        algebraCalc.SetQuadratic("x^2 + x + 1");
+        algebraCalc.SetQuadratic("4x^2 + 14x - 8");
+        //algebraCalc.SetQuadratic("x^2 + x + 1");
         //algebraCalc.PrintCoefficients();
         
         algebraCalc.PrintXVals();

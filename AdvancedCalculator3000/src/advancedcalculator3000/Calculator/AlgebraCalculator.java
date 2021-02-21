@@ -299,21 +299,27 @@ public class AlgebraCalculator implements ICalculator
         int yMin = -10;
         int yMax = 10;
         
-        for (double y = yMax; y >= yMin; y -= 0.5)
+        double resX = 1;
+        resX /= 2;
+        double resY = 1;
+        
+        for (double y = yMax; y >= yMin; y -= resY)
         {
-            for (double x = xMin; x <= xMax; x += 0.25)
+            for (double x = xMin; x <= xMax; x += resX)
             {
                 double yVal = PlugInX(x);
                 
-                if (IsNearlyEqual(y, yVal, aCoefficient))
+                double slope = Math.abs((yVal - PlugInX(x - resX)) / resX);
+                
+                if (IsNearlyEqual(y, yVal, slope / (4 / resY)))
                 {
-                    if (yVal >= PlugInX(x - 0.25)) // if we are increasing
+                    if (yVal >= PlugInX(x - resX)) // if we are increasing
                     {
                         System.out.print("/");
                         continue;
                     }
                     
-                    if (yVal < PlugInX(x - 0.5)) // if we are decreasing
+                    if (yVal < PlugInX(x - resX)) // if we are decreasing
                     {
                         System.out.print("\\");
                         continue;
@@ -323,9 +329,9 @@ public class AlgebraCalculator implements ICalculator
                     continue;
                 }
                 
-                if (y == 0)
+                if (IsNearlyEqual(y, 0, resY / 2))
                 {
-                    if (x == 0)
+                    if (IsNearlyEqual(x, 0, resX / 2))
                     {
                         System.out.print("+");
                         continue;
@@ -333,7 +339,7 @@ public class AlgebraCalculator implements ICalculator
                     System.out.print("-");
                     continue;
                 }
-                if (x == 0)
+                if (IsNearlyEqual(x, 0, resX / 2))
                 {
                     System.out.print("|");
                     continue;

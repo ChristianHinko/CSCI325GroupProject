@@ -299,27 +299,27 @@ public class AlgebraCalculator implements ICalculator
         int yMin = -10;
         int yMax = 10;
         
-        for (int y = yMax; y >= yMin; --y)
+        for (double y = yMax; y >= yMin; y -= 0.5)
         {
-            for (int x = xMin; x <= xMax; ++x)
+            for (double x = xMin; x <= xMax; x += 0.25)
             {
                 double yVal = PlugInX(x);
                 
-                if (y == Math.floor(yVal))
+                if (IsNearlyEqual(y, yVal, aCoefficient))
                 {
-                    if (yVal > PlugInX(x - 1)) // if we are increasing
+                    if (yVal >= PlugInX(x - 1)) // if we are increasing
                     {
-                        System.out.print("/ ");
+                        System.out.print("/");
                         continue;
                     }
                     
                     if (yVal < PlugInX(x - 1)) // if we are decreasing
                     {
-                        System.out.print("\\ ");
+                        System.out.print("\\");
                         continue;
                     }
                     
-                    System.out.print("- ");
+                    System.out.print("-");
                     continue;
                 }
                 
@@ -327,18 +327,18 @@ public class AlgebraCalculator implements ICalculator
                 {
                     if (x == 0)
                     {
-                        System.out.print("+ ");
+                        System.out.print("+");
                         continue;
                     }
-                    System.out.print("- ");
+                    System.out.print("-");
                     continue;
                 }
                 if (x == 0)
                 {
-                    System.out.print("| ");
+                    System.out.print("|");
                     continue;
                 }
-                System.out.print("  ");
+                System.out.print(" ");
             }
             System.out.println("");
         }
@@ -347,6 +347,25 @@ public class AlgebraCalculator implements ICalculator
     public double PlugInX(double x)
     {
         return (aCoefficient * Math.pow(x, 2)) + (bCoefficient * x) + cCoefficient;
+    }
+    
+    public static boolean IsNearlyEqual(double a, double b)
+    {
+        double tolerance = 0.00000001;
+        
+        if (Math.abs(a - b) <= tolerance)
+        {
+            return true;
+        }
+        return false;
+    }
+    public static boolean IsNearlyEqual(double a, double b, double tolerance)
+    {
+        if (Math.abs(a - b) <= tolerance)
+        {
+            return true;
+        }
+        return false;
     }
     
     /**
@@ -450,17 +469,17 @@ public class AlgebraCalculator implements ICalculator
                     // Treat this as the others by setting xIndex to the index after the coefficient
                     xIndex = quadratic.length();
                 }
-
+                
                 int currentCoefficient = 1;
                 if (itteration >= 2)
                 {
                     currentCoefficient = 0;
                 }
-
+                
                 // Build coefficient
                 {
                     String coeStr = "";
-
+                    
                     for (int i = xIndex - 1; i >= 0; --i)
                     {
                         if (Character.isDigit(quadratic.charAt(i)))

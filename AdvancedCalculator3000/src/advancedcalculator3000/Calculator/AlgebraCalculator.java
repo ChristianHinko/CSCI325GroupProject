@@ -307,13 +307,13 @@ public class AlgebraCalculator implements ICalculator
                 
                 if (IsNearlyEqual(y, yVal, aCoefficient))
                 {
-                    if (yVal >= PlugInX(x - 1)) // if we are increasing
+                    if (yVal >= PlugInX(x - 0.25)) // if we are increasing
                     {
                         System.out.print("/");
                         continue;
                     }
                     
-                    if (yVal < PlugInX(x - 1)) // if we are decreasing
+                    if (yVal < PlugInX(x - 0.5)) // if we are decreasing
                     {
                         System.out.print("\\");
                         continue;

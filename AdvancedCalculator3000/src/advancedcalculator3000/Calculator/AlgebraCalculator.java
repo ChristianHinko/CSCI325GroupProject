@@ -88,6 +88,33 @@ public class AlgebraCalculator implements ICalculator
     }
     
     /**
+     * Follows the format: "ax^2 + bx + c".
+     * Examples of viable formats:
+     *  - "x^2 + x + 1"
+     *  - "1x^2 + 1x + 1"
+     *  - "2x^2 + 4x + 2"
+     *  - "x^2 + 2x + 1"
+     *  - "x^2+x+1"
+     *  - "-x^2 - x - 1"
+     * Examples of formats that won't work:
+     *  - "x + x^2 + 1"         // terms are not in order from highest degree to lowest
+     * 
+     * 
+     * // TODO: how would these work?:
+     *  - "0x^2 + 0x + 0"
+     *  - "0x^2 + 1x + 1"
+     *  - "x^2 + 0x + 1"
+     */
+    public void SetQuadratic(String newQuadratic)
+    {
+        quadratic = newQuadratic;
+        UpdateCoefficients();
+        CleanUpQuadratic();
+        QuadraticFormula();
+    }
+    public String GetQuadratic() { return quadratic; }
+    
+    /**
      * Finds the value of x and stores it into x1 and x2.
      */
     public void QuadraticFormula()
@@ -265,35 +292,62 @@ public class AlgebraCalculator implements ICalculator
         return GreatestCommonDivisor(numB, (numA % numB));
     }
     
-    /**
-     * Follows the format: "ax^2 + bx + c".
-     * Examples of viable formats:
-     *  - "x^2 + x + 1"
-     *  - "1x^2 + 1x + 1"
-     *  - "2x^2 + 4x + 2"
-     *  - "x^2 + 2x + 1"
-     *  - "x^2+x+1"
-     *  - "-x^2 - x - 1"
-     * Examples of formats that won't work:
-     *  - "x + x^2 + 1"         // terms are not in order from highest degree to lowest
-     * 
-     * 
-     * // TODO: how would these work?:
-     *  - "0x^2 + 0x + 0"
-     *  - "0x^2 + 1x + 1"
-     *  - "x^2 + 0x + 1"
-     */
-    public void SetQuadratic(String newQuadratic)
+    public void GraphQuadratic()
     {
-        quadratic = newQuadratic;
-        UpdateCoefficients();
-        CleanUpQuadratic();
-        QuadraticFormula();
+        int xMin = -10;
+        int xMax = 10;
+        int yMin = -10;
+        int yMax = 10;
+        
+        for (int y = yMax; y >= yMin; --y)
+        {
+            for (int x = xMin; x <= xMax; ++x)
+            {
+                double yVal = PlugInX(x);
+                
+                if (y == Math.floor(yVal))
+                {
+                    if (yVal > PlugInX(x - 1)) // if we are increasing
+                    {
+                        System.out.print("/ ");
+                        continue;
+                    }
+                    
+                    if (yVal < PlugInX(x - 1)) // if we are decreasing
+                    {
+                        System.out.print("\\ ");
+                        continue;
+                    }
+                    
+                    System.out.print("- ");
+                    continue;
+                }
+                
+                if (y == 0)
+                {
+                    if (x == 0)
+                    {
+                        System.out.print("+ ");
+                        continue;
+                    }
+                    System.out.print("- ");
+                    continue;
+                }
+                if (x == 0)
+                {
+                    System.out.print("| ");
+                    continue;
+                }
+                System.out.print("  ");
+            }
+            System.out.println("");
+        }
     }
-    public String GetQuadratic() { return quadratic; }
     
-    public double GetX1Val() { return x1Val; }
-    public double GetX2Val() { return x2Val; }
+    public double PlugInX(double x)
+    {
+        return (aCoefficient * Math.pow(x, 2)) + (bCoefficient * x) + cCoefficient;
+    }
     
     /**
      * Rebuilds the quadratic string into the most minimal, user-friendly form.
@@ -344,6 +398,9 @@ public class AlgebraCalculator implements ICalculator
     }
     
     
+    public double GetX1Val() { return x1Val; }
+    public double GetX2Val() { return x2Val; }
+    
     public void PrintXVals()
     {
         String x1Str = "" + x1Val;
@@ -367,7 +424,7 @@ public class AlgebraCalculator implements ICalculator
         System.out.println("");
     }
     
-    public void PrintCoefficients()
+    public void PrintCoefficients() // helpfull for debugging
     {
         System.out.println("a: " + aCoefficient + ", b: " + bCoefficient + ", c: " + cCoefficient);
     }

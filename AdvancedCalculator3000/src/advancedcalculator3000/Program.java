@@ -37,18 +37,20 @@ public class Program
         
         AlgebraCalculator algebraCalc = new AlgebraCalculator();
         
-        algebraCalc.InitialUserMenu(scanner);
-        while (true)
-        {
-            algebraCalc.HandleUserMenu(scanner);
-        }
+//        algebraCalc.InitialUserMenu(scanner);
+//        while (true)
+//        {
+//            algebraCalc.HandleUserMenu(scanner);
+//        }
         
-//        algebraCalc.SetQuadratic("2x^2 + 14x - 8");
-//        algebraCalc.PrintCoefficients();
-//        
-//        algebraCalc.PrintXVals();
-//        
-//        String factored = algebraCalc.FactorQuadratic();
-//        System.out.println(factored);
+//        algebraCalc.SetQuadratic("4x^2 + 14x - 8");
+        algebraCalc.SetQuadratic("x^2 + x + 1");
+        algebraCalc.PrintCoefficients();
+        
+        algebraCalc.PrintXVals();
+        
+        String factored = algebraCalc.FactorQuadratic();
+        System.out.println(factored);
+        algebraCalc.GraphQuadratic();
     }
 }

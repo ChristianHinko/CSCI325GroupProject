@@ -5,6 +5,11 @@
  */
 package advancedcalculator3000.Calculator;
 
+
+import java.util.Scanner;
+
+
+
 /**
  * Performs algebra-based math calculations
  * 
@@ -49,11 +54,37 @@ public class AlgebraCalculator implements ICalculator
     }
     
     @Override
-    public void PrintCalculationsMenu()
+    public void InitialUserMenu(Scanner scanner)
     {
-        System.out.println("'d' - Quadratic formula");
+        System.out.println("Enter a quadratic to perform algebra on:");
+        final String userQuadratic = scanner.nextLine();
+        SetQuadratic(userQuadratic);
+    }
+    @Override
+    public void HandleUserMenu(Scanner scanner)
+    {
+        System.out.println("'x' - Quadratic formula");
         System.out.println("'f' - Factor a quadratic");
-        //System.out.println("'r' - Square root");
+        System.out.println("'n' - New quadratic");
+        
+        final char userSelection = scanner.next().charAt(0);
+        scanner.nextLine();
+        
+        switch (userSelection)
+        {
+            case 'x':
+                // Quad form
+                PrintXVals();
+                break;
+            case 'f':
+                // Factor
+                System.out.println("The factored form of your quadratic is: " + "\"" + FactorQuadratic() + "\"");
+                break;
+            
+            case 'n':
+                InitialUserMenu(scanner);
+                break;
+        }
     }
     
     /**

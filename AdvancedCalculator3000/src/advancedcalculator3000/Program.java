@@ -6,6 +6,7 @@
 package advancedcalculator3000;
 
 
+import java.util.Scanner;
 import advancedcalculator3000.Calculator.AlgebraCalculator;
 
 
@@ -32,14 +33,22 @@ public class Program
         
         
         // TESTING:
+        Scanner scanner = new Scanner(System.in);
+        
         AlgebraCalculator algebraCalc = new AlgebraCalculator();
-        algebraCalc.SetQuadratic("2x^2 + 14x - 8");
         
-        algebraCalc.PrintCoefficients();
+        algebraCalc.InitialUserMenu(scanner);
+        while (true)
+        {
+            algebraCalc.HandleUserMenu(scanner);
+        }
         
-        algebraCalc.PrintXVals();
-        
-        String factored = algebraCalc.FactorQuadratic();
-        System.out.println(factored);
+//        algebraCalc.SetQuadratic("2x^2 + 14x - 8");
+//        algebraCalc.PrintCoefficients();
+//        
+//        algebraCalc.PrintXVals();
+//        
+//        String factored = algebraCalc.FactorQuadratic();
+//        System.out.println(factored);
     }
 }

@@ -5,6 +5,11 @@
  */
 package advancedcalculator3000.Calculator;
 
+
+import java.util.Scanner;
+
+
+
 /**
  * Base calculator interface
  * 
@@ -12,5 +17,12 @@ package advancedcalculator3000.Calculator;
  */
 public interface ICalculator
 {
-    public void PrintCalculationsMenu();
+    /**
+     * Used to get this calculator set up for the user (for constant user
+     * configurations regardless of the user's selection)
+     */
+    public void InitialUserMenu(Scanner scanner);
+    
+    /** Print our calculator's options and run calculations for the user */
+    public void HandleUserMenu(Scanner scanner);
 }

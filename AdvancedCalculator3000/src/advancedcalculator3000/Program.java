@@ -7,6 +7,7 @@ package advancedcalculator3000;
 
 
 import java.util.Scanner;
+import advancedcalculator3000.Calculator.ICalculator;
 import advancedcalculator3000.Calculator.AlgebraCalculator;
 
 
@@ -21,36 +22,62 @@ public class Program
      */
     public static void main(String[] args)
     {
-        // TODO: code application logic here
+        Scanner scanner = new Scanner(System.in);
+        ICalculator calculator;
         
-        
-        
-        
-        
-        
+        {
+            char userChar = '\0';
+            while ((userChar = scanner.next().charAt(0)) != 'q')
+            {
+                switch(userChar)
+                {
+                    case 'a':
+                        calculator = new AlgebraCalculator();
+                        break;
+                        
+                    default:
+                        continue;
+                }
+                
+                
+                calculator.InitialUserMenu(scanner);
+                
+                // User menu loop
+                {
+                    char userSelection = '\0';
+                    while ((userSelection = scanner.next().charAt(0)) != 'q')
+                    {
+                        scanner.nextLine();
+                        
+                        calculator.PrintUserMenu();
+                        calculator.HandleUserMenu(scanner, userSelection);
+                    }
+                }
+            }
+        }
         
         
         
         
         // TESTING:
-        Scanner scanner = new Scanner(System.in);
-        
-        AlgebraCalculator algebraCalc = new AlgebraCalculator();
-        
-//        algebraCalc.InitialUserMenu(scanner);
-//        while (true)
-//        {
-//            algebraCalc.HandleUserMenu(scanner);
-//        }
-        
-        algebraCalc.SetQuadratic("4x^2 + 14x - 8");
-        //algebraCalc.SetQuadratic("x^2 + x + 1");
-        //algebraCalc.PrintCoefficients();
-        
-        algebraCalc.PrintXVals();
-        
-        String factored = algebraCalc.FactorQuadratic();
-        System.out.println(factored);
-        algebraCalc.GraphQuadratic();
+//        Scanner scanner = new Scanner(System.in);
+//        
+//        AlgebraCalculator algebraCalc = new AlgebraCalculator();
+//        
+////        algebraCalc.InitialUserMenu(scanner);
+////        while (true)
+////        {
+////            algebraCalc.HandleUserMenu(scanner);
+////        }
+//        
+//        algebraCalc.SetQuadratic("4x^2 + 14x - 8");
+//        //algebraCalc.SetQuadratic("x^2 + x + 1");
+//        //algebraCalc.PrintCoefficients();
+//        
+//        algebraCalc.PrintXVals();
+//        
+//        String factored = algebraCalc.FactorQuadratic();
+//        System.out.println(factored);
+//        algebraCalc.GraphQuadratic();
     }
 }

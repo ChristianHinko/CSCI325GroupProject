@@ -18,6 +18,12 @@ import java.util.Scanner;
 public interface ICalculator
 {
     /**
+     * The name of this calculator. This could be a variable but
+     * this is an interface so we can only do methods.
+     */
+    public String GetCalculatorName();
+    
+    /**
      * Used to get this calculator set up for the user (for constant user
      * configurations regardless of the user's selection)
      */

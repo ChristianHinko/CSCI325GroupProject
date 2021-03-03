@@ -54,6 +54,12 @@ public class AlgebraCalculator implements ICalculator
     }
     
     @Override
+    public String GetCalculatorName()
+    {
+        return "Algebra Calculator";
+    }
+    
+    @Override
     public void InitialUserMenu(Scanner scanner)
     {
         System.out.println("Enter a quadratic to perform algebra on:");

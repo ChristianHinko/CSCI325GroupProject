@@ -17,6 +17,12 @@ import java.util.Scanner;
 public class ArithmeticCalculator implements ICalculator
 {
     @Override
+    public String GetCalculatorName()
+    {
+        return "Arithmetic Calculator";
+    }
+    
+    @Override
     public void InitialUserMenu(Scanner scanner)
     {
         

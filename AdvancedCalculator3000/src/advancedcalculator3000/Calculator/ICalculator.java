@@ -21,7 +21,10 @@ public interface ICalculator
      * The name of this calculator. This could be a variable but
      * this is an interface so we can only do methods.
      */
-    public String GetCalculatorName();
+    public static String GetCalculatorName()
+    {
+        return "Calculator";
+    }
     
     /**
      * Used to get this calculator set up for the user (for constant user

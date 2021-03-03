@@ -53,8 +53,8 @@ public class AlgebraCalculator implements ICalculator
         SetQuadratic("" + a + "x^2 + " + b + "x + " + c);
     }
     
-    @Override
-    public String GetCalculatorName()
+    //@Override
+    public static String GetCalculatorName()
     {
         return "Algebra Calculator";
     }

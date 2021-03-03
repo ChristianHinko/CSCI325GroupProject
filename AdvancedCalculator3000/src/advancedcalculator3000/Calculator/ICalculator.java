@@ -29,6 +29,12 @@ public interface ICalculator
      */
     public void InitialUserMenu(Scanner scanner);
     
-    /** Print our calculator's options and run calculations for the user */
-    public void HandleUserMenu(Scanner scanner);
+    /** Print our calculator's options to the user */
+    public void PrintUserMenu();
+    
+    /** 
+     * Run calculations for the user based off of his given selection.
+     * Also passes in a scanner in case extra user prompts are needed.
+     */
+    public void HandleUserMenu(Scanner scanner, char userSelection);
 }

@@ -66,16 +66,17 @@ public class AlgebraCalculator implements ICalculator
         final String userQuadratic = scanner.nextLine();
         SetQuadratic(userQuadratic);
     }
+    
     @Override
-    public void HandleUserMenu(Scanner scanner)
+    public void PrintUserMenu()
     {
         System.out.println("'x' - Quadratic formula");
         System.out.println("'f' - Factor a quadratic");
         System.out.println("'n' - New quadratic");
-        
-        final char userSelection = scanner.next().charAt(0);
-        scanner.nextLine();
-        
+    }
+    @Override
+    public void HandleUserMenu(Scanner scanner, char userSelection)
+    {
         switch (userSelection)
         {
             case 'x':

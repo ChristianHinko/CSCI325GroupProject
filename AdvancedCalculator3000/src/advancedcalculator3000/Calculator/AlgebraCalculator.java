@@ -62,10 +62,7 @@ public class AlgebraCalculator implements ICalculator
     @Override
     public void InitialUserMenu(Scanner scanner)
     {
-        System.out.println("Enter a quadratic to perform algebra on:");
-        System.out.print("f(x) = ");
-        final String userQuadratic = scanner.nextLine();
-        SetQuadratic(userQuadratic);
+        EnterQuadraticMenu(scanner);
     }
     
     @Override
@@ -76,6 +73,7 @@ public class AlgebraCalculator implements ICalculator
         System.out.println("'f' - Factor quadratic");
         System.out.println("'g' - Graph quadratic");
         System.out.println("'n' - New quadratic");
+        System.out.println("'h' - Help");
     }
     @Override
     public void HandleUserMenu(Scanner scanner, char userSelection)
@@ -104,7 +102,29 @@ public class AlgebraCalculator implements ICalculator
             case 'n':
                 InitialUserMenu(scanner);
                 break;
+            
+            case 'h':
+                PrintHelpMenu();
+                break;
         }
+    }
+    
+    public void EnterQuadraticMenu(Scanner scanner)
+    {
+        System.out.println("Enter a quadratic to perform algebra on:");
+        System.out.print("f(x) = ");
+        final String userQuadratic = scanner.nextLine();
+        SetQuadratic(userQuadratic);
+    }
+    
+    public void PrintHelpMenu()
+    {
+        System.out.println("Examples of viable formats for quadratics:");
+        System.out.println("f(x) = x^2 + x + 1");
+        System.out.println("f(x) = 1x^2 + 1x + 1");
+        System.out.println("f(x) = -2x^2 + 4x + 2");
+        System.out.println("f(x) = x^2+x+1");
+        System.out.println("f(x) = -x^2 - x - 1");
     }
     
     /**

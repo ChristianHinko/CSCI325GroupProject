@@ -58,12 +58,14 @@ public class Program
                     while (userSelection != 'q')
                     {
                         calculator.PrintUserMenu();
+                        System.out.println("");
                         System.out.println("'q' - Quit");
                         
                         userSelection = scanner.next().charAt(0);
                         scanner.nextLine();
                         
                         calculator.HandleUserMenu(scanner, userSelection);
+                        System.out.println("");
                     }
                 }
             }
@@ -98,6 +100,7 @@ public class Program
     {
         System.out.println("'a' - " + ArithmeticCalculator.GetCalculatorName());
         System.out.println("'x' - " + AlgebraCalculator.GetCalculatorName());
+        System.out.println("");
         System.out.println("'q' - Quit");
     }
 }

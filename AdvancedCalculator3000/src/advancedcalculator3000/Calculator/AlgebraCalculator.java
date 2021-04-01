@@ -63,6 +63,7 @@ public class AlgebraCalculator implements ICalculator
     public void InitialUserMenu(Scanner scanner)
     {
         System.out.println("Enter a quadratic to perform algebra on:");
+        System.out.print("f(x) = ");
         final String userQuadratic = scanner.nextLine();
         SetQuadratic(userQuadratic);
     }
@@ -70,8 +71,10 @@ public class AlgebraCalculator implements ICalculator
     @Override
     public void PrintUserMenu()
     {
+        System.out.println("'y' - Evaluate Y at a given value of X");
         System.out.println("'x' - Quadratic formula");
-        System.out.println("'f' - Factor a quadratic");
+        System.out.println("'f' - Factor quadratic");
+        System.out.println("'g' - Graph quadratic");
         System.out.println("'n' - New quadratic");
     }
     @Override
@@ -79,13 +82,23 @@ public class AlgebraCalculator implements ICalculator
     {
         switch (userSelection)
         {
+            case 'y':
+                System.out.println("Enter an X value to plug in to your quadratic: ");
+                final int userX = scanner.nextInt();
+                System.out.println("f(" + userX + ") = " + NumberToString(PlugInX(userX)));
+                break;
             case 'x':
                 // Quad form
+                System.out.println("The values of X where y = 0:");
                 PrintXVals();
                 break;
             case 'f':
                 // Factor
                 System.out.println("The factored form of your quadratic is: " + "\"" + FactorQuadratic() + "\"");
+                break;
+            case 'g':
+                // Graph
+                GraphQuadratic();
                 break;
             
             case 'n':
@@ -141,6 +154,8 @@ public class AlgebraCalculator implements ICalculator
         else
         {
             // TODO: complex solution (how should we handle this? add booleans for x1 and x2 about whether they are imaginary or not?)
+            x1Val = -1;
+            x1Val = -1;
         }
     }
     
@@ -435,25 +450,31 @@ public class AlgebraCalculator implements ICalculator
     
     public void PrintXVals()
     {
-        String x1Str = "" + x1Val;
-        if (x1Val % 1 == 0)
+        if (x1Val == -1 || x2Val == -1)
         {
-            x1Str = "" + (int)x1Val;
+            System.out.println("X has imaginary solutions");
+            return;
         }
-        System.out.print("x = " + x1Str);
+        
+        System.out.print("X = " + NumberToString(x1Val));
         
         // If we have a second solution
         if (x1Val != x2Val)
         {
-            String x2Str = "" + x2Val;
-            if (x2Val % 1 == 0)
-            {
-                x2Str = "" + (int)x2Val;
-            }
-            System.out.print(", or x = " + x2Str);
+            System.out.print(", and X = " + NumberToString(x2Val));
         }
         
         System.out.println("");
+    }
+    private String NumberToString(double number)
+    {
+        String retVal = "" + number;
+        if (number % 1 == 0)
+        {
+            retVal = "" + (int)number;
+        }
+        
+        return retVal;
     }
     
     public void PrintCoefficients() // helpfull for debugging

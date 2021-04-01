@@ -35,6 +35,7 @@ public class Program
                 
                 userChar = scanner.next().charAt(0);
                 scanner.nextLine();
+                userChar = Character.toLowerCase(userChar); // ensure lower case so that upper case inputs work as well
                 
                 switch(userChar)
                 {
@@ -63,6 +64,7 @@ public class Program
                         
                         userSelection = scanner.next().charAt(0);
                         scanner.nextLine();
+                        userSelection = Character.toLowerCase(userSelection); // ensure lower case so that upper case inputs work as well
                         
                         calculator.HandleUserMenu(scanner, userSelection);
                         System.out.println("");
@@ -70,30 +72,6 @@ public class Program
                 }
             }
         }
-        
-        
-        
-        
-        // TESTING:
-//        Scanner scanner = new Scanner(System.in);
-//        
-//        AlgebraCalculator algebraCalc = new AlgebraCalculator();
-//        
-////        algebraCalc.InitialUserMenu(scanner);
-////        while (true)
-////        {
-////            algebraCalc.HandleUserMenu(scanner);
-////        }
-//        
-//        algebraCalc.SetQuadratic("4x^2 + 14x - 8");
-//        //algebraCalc.SetQuadratic("x^2 + x + 1");
-//        //algebraCalc.PrintCoefficients();
-//        
-//        algebraCalc.PrintXVals();
-//        
-//        String factored = algebraCalc.FactorQuadratic();
-//        System.out.println(factored);
-//        algebraCalc.GraphQuadratic();
     }
     
     public static void PrintCalculatorsMenu()

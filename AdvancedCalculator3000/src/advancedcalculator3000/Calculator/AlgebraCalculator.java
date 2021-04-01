@@ -519,6 +519,10 @@ public class AlgebraCalculator implements ICalculator
 
                     if (coeStr.length() > 0)
                     {
+                        if (coeStr.charAt(0) == '-' && Character.isDigit(coeStr.charAt(coeStr.length() - 1)) == false)
+                        {
+                            coeStr = coeStr + "1";
+                        }
                         currentCoefficient = Integer.parseInt(coeStr);
                     }
                 }

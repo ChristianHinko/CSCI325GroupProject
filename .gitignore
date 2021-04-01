@@ -1,5 +1,7 @@
 /AdvancedCalculator3000/nbproject/private/
 /AdvancedCalculator3000/build/
+/AdvancedCalculator3000/nbproject/*.properties
+/AdvancedCalculator3000/nbproject/*build-impl.xml
 
 # Compiled class file
 *.class

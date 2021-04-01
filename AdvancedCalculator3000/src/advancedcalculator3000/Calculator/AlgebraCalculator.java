@@ -85,7 +85,7 @@ public class AlgebraCalculator implements ICalculator
             case 'y':
                 System.out.println("Enter an X value to plug in to your quadratic: ");
                 final int userX = scanner.nextInt();
-                System.out.println("f(" + userX + ") = " + NumberToString(PlugInX(userX)));
+                System.out.println("f(" + userX + ") = " + AdvancedCalculatorGlobals.DoubleToString(PlugInX(userX)));
                 break;
             case 'x':
                 // Quad form
@@ -177,7 +177,7 @@ public class AlgebraCalculator implements ICalculator
         
         
         // Find the GCD of all coefficients
-        GCD = GreatestCommonDivisor(Math.abs(aCoefficient), GreatestCommonDivisor(Math.abs(bCoefficient), Math.abs(cCoefficient)));
+        GCD = AdvancedCalculatorGlobals.GreatestCommonDivisor(Math.abs(aCoefficient), AdvancedCalculatorGlobals.GreatestCommonDivisor(Math.abs(bCoefficient), Math.abs(cCoefficient)));
         
         // Get the most factored forms of our coefficients
         int factoredA = aCoefficient;
@@ -236,7 +236,7 @@ public class AlgebraCalculator implements ICalculator
         // Calculate our first factor
         {
             coeffOne = factoredA;
-            int divisorOne = GreatestCommonDivisor(Math.abs(constOne), Math.abs(coeffOne)); 
+            int divisorOne = AdvancedCalculatorGlobals.GreatestCommonDivisor(Math.abs(constOne), Math.abs(coeffOne)); 
             
             constOne /= divisorOne;
             coeffOne /= divisorOne;
@@ -245,7 +245,7 @@ public class AlgebraCalculator implements ICalculator
         // Calculate our second factor
         {
             coeffTwo = factoredA;
-            int divisorTwo = GreatestCommonDivisor(Math.abs(constTwo), Math.abs(coeffTwo));
+            int divisorTwo = AdvancedCalculatorGlobals.GreatestCommonDivisor(Math.abs(constTwo), Math.abs(coeffTwo));
             
             constTwo /= divisorTwo;
             coeffTwo /= divisorTwo;
@@ -304,15 +304,6 @@ public class AlgebraCalculator implements ICalculator
         return retVal;
     }
     
-    public static int GreatestCommonDivisor(int numA, int numB)
-    {
-        if (numB == 0)
-        {
-            return numA;
-        }
-        
-        return GreatestCommonDivisor(numB, (numA % numB));
-    }
     
     public void GraphQuadratic()
     {
@@ -333,7 +324,7 @@ public class AlgebraCalculator implements ICalculator
                 
                 double slope = Math.abs((yVal - PlugInX(x - resX)) / resX);
                 
-                if (IsNearlyEqual(y, yVal, slope / (4 / resY)))
+                if (AdvancedCalculatorGlobals.IsNearlyEqual(y, yVal, slope / (4 / resY)))
                 {
                     if (yVal >= PlugInX(x - resX)) // if we are increasing
                     {
@@ -351,9 +342,9 @@ public class AlgebraCalculator implements ICalculator
                     continue;
                 }
                 
-                if (IsNearlyEqual(y, 0, resY / 2))
+                if (AdvancedCalculatorGlobals.IsNearlyEqual(y, 0, resY / 2))
                 {
-                    if (IsNearlyEqual(x, 0, resX / 2))
+                    if (AdvancedCalculatorGlobals.IsNearlyEqual(x, 0, resX / 2))
                     {
                         System.out.print("+");
                         continue;
@@ -361,7 +352,7 @@ public class AlgebraCalculator implements ICalculator
                     System.out.print("-");
                     continue;
                 }
-                if (IsNearlyEqual(x, 0, resX / 2))
+                if (AdvancedCalculatorGlobals.IsNearlyEqual(x, 0, resX / 2))
                 {
                     System.out.print("|");
                     continue;
@@ -375,25 +366,6 @@ public class AlgebraCalculator implements ICalculator
     public double PlugInX(double x)
     {
         return (aCoefficient * Math.pow(x, 2)) + (bCoefficient * x) + cCoefficient;
-    }
-    
-    public static boolean IsNearlyEqual(double a, double b)
-    {
-        double tolerance = 0.00000001;
-        
-        if (Math.abs(a - b) <= tolerance)
-        {
-            return true;
-        }
-        return false;
-    }
-    public static boolean IsNearlyEqual(double a, double b, double tolerance)
-    {
-        if (Math.abs(a - b) <= tolerance)
-        {
-            return true;
-        }
-        return false;
     }
     
     /**
@@ -456,25 +428,15 @@ public class AlgebraCalculator implements ICalculator
             return;
         }
         
-        System.out.print("X = " + NumberToString(x1Val));
+        System.out.print("X = " + AdvancedCalculatorGlobals.DoubleToString(x1Val));
         
         // If we have a second solution
         if (x1Val != x2Val)
         {
-            System.out.print(", and X = " + NumberToString(x2Val));
+            System.out.print(", and X = " + AdvancedCalculatorGlobals.DoubleToString(x2Val));
         }
         
         System.out.println("");
-    }
-    private String NumberToString(double number)
-    {
-        String retVal = "" + number;
-        if (number % 1 == 0)
-        {
-            retVal = "" + (int)number;
-        }
-        
-        return retVal;
     }
     
     public void PrintCoefficients() // helpfull for debugging

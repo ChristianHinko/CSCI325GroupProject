@@ -10,6 +10,7 @@ import java.util.Scanner;
 import advancedcalculator3000.Calculator.ICalculator;
 import advancedcalculator3000.Calculator.AlgebraCalculator;
 import advancedcalculator3000.Calculator.ArithmeticCalculator;
+import advancedcalculator3000.Calculator.TrigonometricCalculator;
 
 
 
@@ -45,6 +46,9 @@ public class Program
                     case 'x':
                         calculator = new AlgebraCalculator();
                         break;
+                    case 't':
+                        calculator = new TrigonometricCalculator();
+                        break;
                         
                     default:
                         continue;
@@ -78,6 +82,7 @@ public class Program
     {
         System.out.println("'a' - " + ArithmeticCalculator.GetCalculatorName());
         System.out.println("'x' - " + AlgebraCalculator.GetCalculatorName());
+        System.out.println("'t' - " + TrigonometricCalculator.GetCalculatorName());
         System.out.println("");
         System.out.println("'q' - Quit");
     }

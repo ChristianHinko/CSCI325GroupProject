@@ -5,10 +5,36 @@
  */
 package advancedcalculator3000.Calculator;
 
+import java.util.Scanner;
+
 /**
  *
  * @author natem
  */
-public class TrigonometricCalculator {
+public class TrigonometricCalculator implements ICalculator
+{
+    //@Override
+    public static String GetCalculatorName()
+    {
+        return "Trigonometric Calculator";
+    }
+
+    @Override
+    public void InitialUserMenu(Scanner scanner) 
+    {
+        
+    }
+
+    @Override
+    public void PrintUserMenu() 
+    {
+        
+    }
+
+    @Override
+    public void HandleUserMenu(Scanner scanner, char userSelection) 
+    {
+        
+    }
     
 }

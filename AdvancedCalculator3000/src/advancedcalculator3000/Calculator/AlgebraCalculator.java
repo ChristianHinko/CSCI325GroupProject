@@ -44,6 +44,7 @@ public class AlgebraCalculator implements ICalculator
     private double x2Val;
     
     
+    
     public AlgebraCalculator()
     {
         SetQuadratic("x^2 + x + 1");
@@ -92,15 +93,23 @@ public class AlgebraCalculator implements ICalculator
                 break;
             case 'f':
                 // Factor
-                System.out.println("The factored form of your quadratic is: " + "\"" + FactorQuadratic() + "\"");
+                String factoredQuadratic = FactorQuadratic();
+                if (factoredQuadratic.equals(quadratic))
+                {
+                    System.out.println("Your quadratic cannot be factored: " + "\"" + factoredQuadratic + "\"");
+                    break;
+                }
+                
+                System.out.println("The factored form of your quadratic is: " + "\"" + factoredQuadratic + "\"");
                 break;
+                
             case 'g':
                 // Graph
                 GraphQuadratic();
                 break;
             
             case 'n':
-                InitialUserMenu(scanner);
+                InitialUserMenu(scanner); // this is temporary
                 break;
             
             case 'h':
@@ -173,9 +182,10 @@ public class AlgebraCalculator implements ICalculator
         }
         else
         {
-            // TODO: complex solution (how should we handle this? add booleans for x1 and x2 about whether they are imaginary or not?)
-            x1Val = -1;
-            x1Val = -1;
+            // TODO: complex solution (how should we handle this? add imaginary components for x1 and x2?)
+            
+            x1Val = -Double.MAX_VALUE;
+            x1Val = -Double.MAX_VALUE;
         }
     }
     
@@ -442,7 +452,7 @@ public class AlgebraCalculator implements ICalculator
     
     public void PrintXVals()
     {
-        if (x1Val == -1 || x2Val == -1)
+        if (x1Val == -Double.MAX_VALUE || x2Val == -Double.MAX_VALUE)
         {
             System.out.println("X has imaginary solutions");
             return;
@@ -459,7 +469,7 @@ public class AlgebraCalculator implements ICalculator
         System.out.println("");
     }
     
-    public void PrintCoefficients() // helpfull for debugging
+    public void PrintCoefficients() // helpful for debugging
     {
         System.out.println("a: " + aCoefficient + ", b: " + bCoefficient + ", c: " + cCoefficient);
     }

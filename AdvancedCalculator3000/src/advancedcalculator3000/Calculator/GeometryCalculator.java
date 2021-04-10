@@ -15,6 +15,16 @@ import java.util.Scanner;
  */
 public class GeometryCalculator implements ICalculator
 {
+    private EShape shape;
+    
+    
+    
+    public GeometryCalculator()
+    {
+        shape = EShape.SHAPE_None;
+    }
+    
+    
     //@Override
     public static String GetCalculatorName()
     {
@@ -26,14 +36,30 @@ public class GeometryCalculator implements ICalculator
     {
         System.out.println("Choose a shape to perform geometry on:");
         PrintShapesMenu();
-//        final char userShapeSelection = scanner.next().charAt(0);
         
+        final char userShapeSelection = scanner.next().charAt(0);
+        shape = EShape.GetShapeByCharacter(userShapeSelection);
     }
     
     @Override
     public void PrintUserMenu()
     {
-        
+        switch (shape)
+        {
+            case SHAPE_Box:
+                
+                break;
+            case SHAPE_Sphere:
+                
+                break;
+            case SHAPE_Triangle:
+                
+                break;
+                
+                
+            default:
+                break;
+        }
     }
     @Override
     public void HandleUserMenu(Scanner scanner, char userSelection)

@@ -50,7 +50,7 @@ public class ArithmeticCalculator implements ICalculator
         System.out.println("Enter two numbers to perform calculations with.");
         System.out.println("Then select the method of operation.");
         //System.out.println("If the desired calculation is to perform the square root of a number, only input one number.");
-        
+        System.out.println();
         System.out.println("Enter the first number: ");
         xVal1 = scanner.nextDouble();
         System.out.println("Enter the second number: ");
@@ -60,6 +60,7 @@ public class ArithmeticCalculator implements ICalculator
     @Override
     public void PrintUserMenu() 
     {
+        System.out.println();
         System.out.println("Choose your method of operation: ");
         System.out.println();
         System.out.println("'a' - Addition");
@@ -80,26 +81,31 @@ public class ArithmeticCalculator implements ICalculator
             case 'a':
                 // Addition
                 //x + y = z
+                System.out.println();
                 System.out.println(xVal1 + " + " + xVal2 + " = " + (xVal1 + xVal2));
                 break;
             case 's':
                 // Subtraction
                 //x - y = z
+                System.out.println();
                 System.out.println(xVal1 + " - " + xVal2 + " = " + (xVal1 - xVal2));
                 break;
             case 'm':
                 // Multiplication
                 //x * y = z
+                System.out.println();
                 System.out.println(xVal1 + " * " + xVal2 + " = " + (xVal1 * xVal2));
                 break;
             case 'd':
                 // Division
                 //x - y = z
+                System.out.println();
                 System.out.println(xVal1 + " / " + xVal2 + " = " + (xVal1 / xVal2));
                 break;
             case 'p':
                 // Powers
                 //x ^ y = z
+                System.out.println();
                 System.out.println(xVal1 + " ^ " + xVal2 + " = " + (Math.pow(xVal1, xVal2)));
                 break;
             /*case 'r':

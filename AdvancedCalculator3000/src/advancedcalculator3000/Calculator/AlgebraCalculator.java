@@ -337,19 +337,102 @@ public class AlgebraCalculator implements ICalculator
     
     public void GraphQuadratic()
     {
-        int xMin = -10;
-        int xMax = 10;
-        int yMin = -10;
-        int yMax = 10;
+        final int xMin = -10;
+        final int xMax = 10;
+        final int yMin = -10;
+        final int yMax = 10;
         
         double resX = 1;
         resX /= 2;
         double resY = 1;
         
+        final int xMinNumDigs = AdvancedCalculatorGlobals.NumDigits(xMin, true);
+        final int xMaxNumDigs = AdvancedCalculatorGlobals.NumDigits(xMax, true);
+        final int yMinNumDigs = AdvancedCalculatorGlobals.NumDigits(yMin, true);
+        final int yMaxNumDigs = AdvancedCalculatorGlobals.NumDigits(yMax, true);
+        
         for (double y = yMax; y >= yMin; y -= resY)
         {
             for (double x = xMin; x <= xMax; x += resX)
             {
+                if (y == 0)
+                {
+                    if (x == (xMax - xMaxNumDigs))
+                    {
+                        System.out.print("|");
+                        continue;
+                    }
+                    if (x == (xMin + xMinNumDigs))
+                    {
+                        System.out.print("|");
+                        continue;
+                    }
+                }
+                if (y == -resY)
+                {
+                    if (x == (xMax - xMaxNumDigs))
+                    {
+                        System.out.print("" + xMax);
+                        for (int i = 0; i < xMaxNumDigs - 1; ++i)
+                        {
+                            x += resX;
+                        }
+                        continue;
+                    }
+                    if (x == (xMin + xMinNumDigs))
+                    {
+                        System.out.print("" + xMin);
+                        for (int i = 0; i < xMinNumDigs - 1; ++i)
+                        {
+                            x += resX;
+                        }
+                        continue;
+                    }
+                }
+                
+                if (x == 0)
+                {
+                    if (y == (yMax - yMaxNumDigs))
+                    {
+                        System.out.print("-");
+                        continue;
+                    }
+                    if (y == (yMin + yMinNumDigs))
+                    {
+                        System.out.print("-");
+                        continue;
+                    }
+                }
+                if (y == (yMax - yMaxNumDigs))
+                {
+                    if (x == -(resX + yMaxNumDigs - 1))
+                    {
+                        System.out.print("" + yMax);
+                        for (int i = 0; i < yMaxNumDigs - 1; ++i)
+                        {
+                            x += resX;
+                        }
+                        continue;
+                    }
+                }
+                if (y == (yMin + yMinNumDigs))
+                {
+                    if (x == -(resX + yMinNumDigs - 1))
+                    {
+                        System.out.print("" + yMin);
+                        for (int i = 0; i < yMinNumDigs - 1; ++i)
+                        {
+                            x += resX;
+                        }
+                        continue;
+                    }
+                }
+                
+                
+                
+                
+                
+               
                 double yVal = PlugInX(x);
                 
                 double slope = Math.abs((yVal - PlugInX(x - resX)) / resX);
@@ -379,11 +462,33 @@ public class AlgebraCalculator implements ICalculator
                         System.out.print("+");
                         continue;
                     }
+                    
+                    if (AdvancedCalculatorGlobals.IsNearlyEqual(x, xMax))
+                    {
+                        System.out.print(">");
+                        continue;
+                    }
+                    if (AdvancedCalculatorGlobals.IsNearlyEqual(x, xMin))
+                    {
+                        System.out.print("<");
+                        continue;
+                    }
                     System.out.print("-");
                     continue;
                 }
                 if (AdvancedCalculatorGlobals.IsNearlyEqual(x, 0, resX / 2))
                 {
+                    if (AdvancedCalculatorGlobals.IsNearlyEqual(y, yMax))
+                    {
+                        System.out.print("^");
+                        continue;
+                    }
+                    if (AdvancedCalculatorGlobals.IsNearlyEqual(y, yMin))
+                    {
+                        System.out.print("v");
+                        continue;
+                    }
+                    
                     System.out.print("|");
                     continue;
                 }

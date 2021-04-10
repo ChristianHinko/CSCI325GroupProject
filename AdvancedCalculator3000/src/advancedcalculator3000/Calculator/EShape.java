@@ -49,7 +49,7 @@ public enum EShape
         
         return Character.toLowerCase(shapeName.charAt(0));
     }
-    public static EShape GetShapeCharacter(char shapeChar)
+    public static EShape GetShapeByCharacter(char shapeChar)
     {
         for (EShape shape : EShape.values())
         {

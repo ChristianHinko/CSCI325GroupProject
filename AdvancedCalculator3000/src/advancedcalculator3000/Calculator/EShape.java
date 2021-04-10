@@ -13,20 +13,13 @@ package advancedcalculator3000.Calculator;
  */
 public enum EShape
 {
-    SHAPE_Square
+    SHAPE_None,
+    SHAPE_Box
     {
         @Override
         public String toString()
         {
-            return "Square";
-        }
-    },
-    SHAPE_Rectangle
-    {
-        @Override
-        public String toString()
-        {
-            return "Rectangle";
+            return "Box";
         }
     },
     SHAPE_Sphere
@@ -44,5 +37,28 @@ public enum EShape
         {
             return "Triangle";
         }
+    };
+    
+    public static char GetShapeCharacter(EShape shape)
+    {
+        String shapeName = shape.toString();
+        if (shapeName.isEmpty())
+        {
+            return '\0';
+        }
+        
+        return Character.toLowerCase(shapeName.charAt(0));
+    }
+    public static EShape GetShapeCharacter(char shapeChar)
+    {
+        for (EShape shape : EShape.values())
+        {
+            if (GetShapeCharacter(shape) == shapeChar)
+            {
+                return shape;
+            }
+        }
+        
+        return SHAPE_None;
     }
 }

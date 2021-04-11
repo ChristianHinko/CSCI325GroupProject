@@ -78,7 +78,7 @@ public class GeometryCalculator implements ICalculator
                 break;
                 
             case SHAPE_Cone:
-                System.out.print("Enter the angle of your " + shape.toString().toLowerCase() + ": ");
+                System.out.print("Enter the angle of your " + shape.toString().toLowerCase() + " (in degrees): ");
                 final double userConeAngle = scanner.nextDouble();
                 
                 System.out.print("Enter the height of your " + shape.toString().toLowerCase() + ": ");
@@ -88,7 +88,7 @@ public class GeometryCalculator implements ICalculator
                 coneAngle = (Math.PI/180) * userConeAngle;
                 coneHeight = userConeHeight;
                 
-                coneSideLength = 1 / (Math.cos(coneAngle) * coneHeight);
+                coneSideLength = 1.0 / (Math.cos(coneAngle) * coneHeight);
                 coneRadius = coneSideLength * Math.sin(coneAngle);
                 
                 break;
@@ -117,10 +117,10 @@ public class GeometryCalculator implements ICalculator
                 switch (userSelection)
                 {
                     case 'v':
-                        VolumeOfBox();
+                        System.out.println("The volume of your " + shape.toString().toLowerCase() + " is: " + VolumeOfBox());
                         break;
                     case 's':
-                        SurfaceAreaOfBox();
+                        System.out.println("The surface area of your " + shape.toString().toLowerCase() + " is: " + SurfaceAreaOfBox());
                         break;
                         
                     default:
@@ -133,10 +133,10 @@ public class GeometryCalculator implements ICalculator
                 switch (userSelection)
                 {
                     case 'v':
-                        VolumeOfSphere();
+                        System.out.println("The volume of your " + shape.toString().toLowerCase() + " is: " + VolumeOfSphere());
                         break;
                     case 's':
-                        SurfaceAreaOfSphere();
+                        System.out.println("The surface area of your " + shape.toString().toLowerCase() + " is: " + SurfaceAreaOfSphere());
                         break;
                         
                     default:
@@ -149,10 +149,10 @@ public class GeometryCalculator implements ICalculator
                 switch (userSelection)
                 {
                     case 'v':
-                        VolumeOfCone();
+                        System.out.println("The volume of your " + shape.toString().toLowerCase() + " is: " + VolumeOfCone());
                         break;
                     case 's':
-                        SurfaceAreaOfCone();
+                        System.out.println("The surface area of your " + shape.toString().toLowerCase() + " is: " + SurfaceAreaOfCone());
                         break;
                         
                     default:
@@ -196,7 +196,7 @@ public class GeometryCalculator implements ICalculator
     
     private double VolumeOfSphere()
     {
-        return (4/3) * (Math.PI * Math.pow(sphereRadius, 3));
+        return (4.0/3.0) * (Math.PI * Math.pow(sphereRadius, 3));
     }
     private double SurfaceAreaOfSphere()
     {

@@ -8,6 +8,8 @@ package advancedcalculator3000.Calculator;
 
 
 /**
+ * Shape enum with helper methods that associate the shape names
+ * with a character.
  * 
  * @author Christian Hinkle
  */
@@ -30,12 +32,12 @@ public enum EShape
             return "Sphere";
         }
     },
-    SHAPE_Triangle
+    SHAPE_Cone
     {
         @Override
         public String toString()
         {
-            return "Triangle";
+            return "Cone";
         }
     };
     
@@ -53,6 +55,11 @@ public enum EShape
     {
         for (EShape shape : EShape.values())
         {
+            if (shape == SHAPE_None)
+            {
+                continue;
+            }
+            
             if (GetShapeCharacter(shape) == shapeChar)
             {
                 return shape;

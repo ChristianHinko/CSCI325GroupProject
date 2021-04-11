@@ -8,6 +8,8 @@ package advancedcalculator3000.Calculator;
 
 
 /**
+ * Shape enum with helper methods that associate the shape names
+ * with a character.
  * 
  * @author Christian Hinkle
  */

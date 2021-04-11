@@ -16,7 +16,8 @@ import advancedcalculator3000.Calculator.TrigonometricCalculator;
 
 
 /**
- * This contains the entry point of the application
+ * This holds information about our program and contains the entry point of
+ * the application
  */
 public class Program
 {
@@ -25,9 +26,11 @@ public class Program
      */
     public static void main(String[] args)
     {
+        // Our scanner for taking in user input
         Scanner scanner = new Scanner(System.in);
-        ICalculator calculator;
         
+        
+        // Display our welcome screen
         System.out.println("************************************************************************************************************************");
         System.out.println("    _       _                               _    ____      _            _       _               _____  ___   ___   ___  ");
         System.out.println("   / \\   __| |_   ____ _ _ __   ___ ___  __| |  / ___|__ _| | ___ _   _| | __ _| |_ ___  _ __  |___ / / _ \\ / _ \\ / _ \\ ");
@@ -36,6 +39,10 @@ public class Program
         System.out.println("/_/   \\_\\__,_| \\_/ \\__,_|_| |_|\\___\\___|\\__,_|  \\____\\__,_|_|\\___|\\__,_|_|\\__,_|\\__\\___/|_|    |____/ \\___/ \\___/ \\___/ ");
         System.out.println("************************************************************************************************************************");
         System.out.println("");
+        
+        
+        // A reference to our current calculator that the user is using
+        ICalculator calculator;
         
         // Calculator selection loop
         {
@@ -49,6 +56,7 @@ public class Program
                 scanner.nextLine();
                 userChar = Character.toLowerCase(userChar); // ensure lower case so that upper case inputs work as well
                 
+                // Set our calculator to the one chosen by the user
                 switch(userChar)
                 {
                     case 'a':
@@ -69,6 +77,7 @@ public class Program
                 }
                 
                 
+                // Broadcast our initialization event before we begin the calculator loop
                 calculator.InitialUserMenu(scanner);
                 
                 // Calculator user menu loop
@@ -90,18 +99,20 @@ public class Program
                 }
             }
             
-            
+            // Print our farewell message
             System.out.println("Thank you for using " + GetProgramName() + " !!!");
             System.out.println("Come back again later!");
             
         }
     }
     
+    /** The name of this program */
     public static String GetProgramName()
     {
         return "Advanced Calculator 3000";
     }
     
+    /** Lists the different calculators in a menu with options to choose from */
     public static void PrintCalculatorsMenu()
     {
         System.out.println("'a' - " + ArithmeticCalculator.GetCalculatorName());

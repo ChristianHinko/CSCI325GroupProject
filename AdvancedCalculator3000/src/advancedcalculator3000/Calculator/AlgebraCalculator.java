@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 
 /**
- * Performs algebra-based math calculations
+ * Performs algebra-based math calculations with quadratic functions
  * 
  * @author Christian Hinkle
  */

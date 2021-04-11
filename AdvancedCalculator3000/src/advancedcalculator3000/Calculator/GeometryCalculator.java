@@ -10,19 +10,24 @@ import java.util.Scanner;
 
 
 /**
+ * Performs calculations on different geometric shapes
  * 
  * @author Christian Hinkle
  */
 public class GeometryCalculator implements ICalculator
 {
+    // The shape we are currently using for calculations
     private EShape shape;
     
+    // Box properties
     private double boxLength;
     private double boxWidth;
     private double boxHeight;
     
+    // Sphere properties
     private double sphereRadius;
     
+    // Cone properties
     private double coneAngle;
     private double coneRadius;
     private double coneHeight;

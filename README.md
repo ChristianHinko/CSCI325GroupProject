@@ -1,3 +1,3 @@
-# CSCI325GroupProject
+# Advanced Calculator 3000
 
 Our program will be an advanced math calculator with a wide variety of math problems that can be solved with just a few inputs from the user. The calculator does all the work by taking the users input based on what type of math and function they selected at the start-up menu. These types include arithmetic, algebra, trigonometry, and geometry. After the user makes their selection, the program will then prompt the user to enter the necessary inputs to solve their problem.

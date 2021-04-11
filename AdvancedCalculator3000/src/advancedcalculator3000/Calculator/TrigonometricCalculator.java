@@ -18,11 +18,26 @@ public class TrigonometricCalculator implements ICalculator
     private double degree;
     private double radian;
     private double toRadians;
-    private double sideOne;
     private double angleOne;
-    private double sideTwo;
     private double angleTwo;
+    private double angleThree;
+    private double sideOne;
+    private double sideTwo;
     private double sideThree;
+    
+    public TrigonometricCalculator()
+    {
+        userAngle = 0.0;
+        degree = 0.0;
+        radian = 0.0;
+        toRadians = 0.0;
+        angleOne = 0.0;
+        angleTwo = 0.0;
+        angleThree = 0.0;
+        sideOne = 0.0;
+        sideTwo = 0.0;
+        sideThree = 0.0;        
+    }
     
     //@Override
     public static String GetCalculatorName()
@@ -46,8 +61,9 @@ public class TrigonometricCalculator implements ICalculator
         System.out.println("'n' - Convert radians to degrees");
         System.out.println("'a' - Calculate the area of a triangle");
         System.out.println("'l' - Solve a triangle using two angles and one side length");
-        System.out.println("'g' - Solve a triangle using three side lengths");
         System.out.println("'h' - Help");
+        System.out.println("");
+        System.out.println("Choose an option:");
     }
 
     @Override
@@ -76,13 +92,14 @@ public class TrigonometricCalculator implements ICalculator
             case 'd':
                 System.out.println("Enter a degree to convert to radians:");
                 degree = scanner.nextDouble();
-                System.out.printf(degree + " degrees is equal to " + "%.2f", ConvertDegree(degree) + " radians");
+                System.out.printf(degree + " degrees is equal to %.2f radians", ConvertDegree(degree));
                 System.out.println("");
                 break;
             case 'n':
                 System.out.println("Enter a radian to convert to degrees:");
                 radian = scanner.nextDouble();
-                System.out.printf(radian + " radians is equal to " + "%.2f", ConvertRadian(radian) + " degrees");
+                System.out.printf(radian + " radians is equal to %.2f degrees", ConvertRadian(radian));
+                
                 System.out.println("");
                 break;
             case 'a':
@@ -96,24 +113,14 @@ public class TrigonometricCalculator implements ICalculator
                 FindAreaOfTriangle(angleOne, sideOne, sideTwo, scanner);
                 break;
             case 'l':
-                System.out.println("Enter the angle that corresponds to an opposite side:");
+                System.out.println("Enter the first angle:");
                 angleOne = scanner.nextDouble();
-                System.out.println("Enter the side length opposite of your first angle:");
-                sideOne = scanner.nextDouble();
                 System.out.println("Enter your second angle:");
                 angleTwo = scanner.nextDouble();
+                System.out.println("Enter the side length:");
+                sideOne = scanner.nextDouble();
                 System.out.println("");
                 LawOfSine(angleOne, sideOne, angleTwo, scanner);
-                break;
-            case 'g':
-                System.out.println("Enter your first side length:");
-                sideOne = scanner.nextDouble();
-                System.out.println("Enter your second side length:");
-                sideTwo = scanner.nextDouble();
-                System.out.println("Enter your third side length:");
-                sideThree = scanner.nextDouble();
-                System.out.println("");
-                LawOfCosine(sideOne, sideTwo, sideThree, scanner);
                 break;
             case 'h':
                 PrintHelpMenu();
@@ -135,6 +142,7 @@ public class TrigonometricCalculator implements ICalculator
             System.out.printf("Sin(" + userAngle + ") is equal to " + "%.2f", Math.sin(toRadians));
             System.out.println("");
     }
+    
     public void FindCosine(double userAngle, Scanner scanner) 
     {
         toRadians = ConvertDegree(userAngle);// userAngle * Math.PI/180;
@@ -149,6 +157,7 @@ public class TrigonometricCalculator implements ICalculator
             System.out.printf("Cos(" + userAngle + ") is equal to " + "%.2f", Math.cos(toRadians));
             System.out.println("");
     }
+    
     public void FindTangent(double userAngle, Scanner scanner) 
     {
         toRadians = ConvertDegree(userAngle);
@@ -163,14 +172,17 @@ public class TrigonometricCalculator implements ICalculator
             System.out.printf("Tan(" + userAngle + ") is equal to " + "%.2f", Math.tan(toRadians));
             System.out.println("");
     }
+    
     public double ConvertDegree(double degree)
     {
-        return degree * Math.PI/180;
+        return degree * Math.PI/180.0;
     }
+    
     public double ConvertRadian(double radian)
     {
-        return radian * 180/Math.PI;
+        return radian / (Math.PI / 180.0);
     }
+    
     public void FindAreaOfTriangle (double angleOne, double sideOne, double sideTwo, Scanner scanner)
     {
         double areaOfTriangle;
@@ -192,16 +204,42 @@ public class TrigonometricCalculator implements ICalculator
             System.out.printf("The area of the triangle is " + "%.2f", areaOfTriangle);
             System.out.println("");          
     }
+    
     public void LawOfSine(double angleOne, double sideOne, double angleTwo, Scanner scanner)
     {
+        angleThree = 180 - (angleOne + angleTwo);
         
+        sideTwo = (sideOne * (Math.sin(ConvertDegree(angleTwo)))) / Math.sin(ConvertDegree(angleOne));
+        
+        sideThree = (sideOne * (Math.sin(ConvertDegree(angleThree)))) / Math.sin(ConvertDegree(angleOne));
+        
+        if (angleOne <= 0 || angleTwo <= 0 || sideOne <= 0)
+        {
+            System.out.println("Re-enter your first angle but without a negative:");
+            angleOne = scanner.nextDouble();
+            System.out.println("Re-enter your second angle but without a negative:");
+            angleTwo = scanner.nextDouble();
+            System.out.println("Re-enter your side length but without a negative");
+            sideOne = scanner.nextDouble();
+            
+            LawOfSine(angleOne, sideOne, angleTwo, scanner);
+        }
+        else
+            System.out.printf("Angle 1: " + angleOne + "       Side 1: " + "%.2f", sideOne);
+            System.out.println("");
+            System.out.printf("Angle 2: " + angleTwo + "       Side 2: " + "%.2f", sideTwo);
+            System.out.println("");
+            System.out.printf("Angle 3: " + angleThree + "       Side 3: " + "%.2f", sideThree);
+            System.out.println("");
     }   
-    public void LawOfCosine(double sideOne, double sideTwo, double sideThree, Scanner scanner)
-    {
-        
-    }
     public void PrintHelpMenu()
     {
-        System.out.println("HELP!");
+        System.out.println("'s' - Only enter in an angle that is positive.");
+        System.out.println("'c' - Only enter in an angle that is positive.");
+        System.out.println("'t' - Only enter in an angle that is positive.");
+        System.out.println("'d' - Only enter a value that is a degree.");
+        System.out.println("'n' - Only enter a value that is a radian");
+        System.out.println("'a' - Calculate the area of a triangle");
+        System.out.println("'l' - Make sure all of your entries are positive because a triangle cannot have negative angles or sides.");
     }
 }

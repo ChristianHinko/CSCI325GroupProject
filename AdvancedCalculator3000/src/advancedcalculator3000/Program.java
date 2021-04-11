@@ -8,10 +8,10 @@ package advancedcalculator3000;
 
 import java.util.Scanner;
 import advancedcalculator3000.Calculator.ICalculator;
-import advancedcalculator3000.Calculator.AlgebraCalculator;
-import advancedcalculator3000.Calculator.ArithmeticCalculator;
-import advancedcalculator3000.Calculator.GeometryCalculator;
-import advancedcalculator3000.Calculator.TrigonometricCalculator;
+import advancedcalculator3000.Calculator.Calculators.AlgebraCalculator;
+import advancedcalculator3000.Calculator.Calculators.ArithmeticCalculator;
+import advancedcalculator3000.Calculator.Calculators.GeometryCalculator;
+import advancedcalculator3000.Calculator.Calculators.TrigonometricCalculator;
 
 
 

@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package advancedcalculator3000.Calculator;
+package advancedcalculator3000.Calculator.Calculators;
 
 
+import advancedcalculator3000.Calculator.ICalculator;
 import java.util.Scanner;
+import advancedcalculator3000.AdvancedCalculatorGlobals;
 
 
 

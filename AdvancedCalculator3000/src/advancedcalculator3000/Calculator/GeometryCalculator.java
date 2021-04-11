@@ -53,7 +53,7 @@ public class GeometryCalculator implements ICalculator
         System.out.println("'v' - Volume of " + shape.toString().toLowerCase());
         System.out.println("'a' - Surface area of " + shape.toString().toLowerCase());
         System.out.println("'n' - New shape");
-        System.out.println("'h' - Help");
+//        System.out.println("'h' - Help");
     }
     @Override
     public void HandleUserMenu(Scanner scanner, char userSelection)
@@ -97,9 +97,9 @@ public class GeometryCalculator implements ICalculator
             case 'n':
                 PromptForNewShape(scanner);
                 break;
-            case 'h':
-                PrintHelpMenu();
-                break;
+//            case 'h':
+//                PrintHelpMenu();
+//                break;
                 
             default:
                 break;

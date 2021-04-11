@@ -16,7 +16,7 @@ import advancedcalculator3000.Calculator.TrigonometricCalculator;
 
 
 /**
- * 
+ * This contains the entry point of the application
  */
 public class Program
 {
@@ -28,11 +28,21 @@ public class Program
         Scanner scanner = new Scanner(System.in);
         ICalculator calculator;
         
+        System.out.println("************************************************************************************************************************");
+        System.out.println("    _       _                               _    ____      _            _       _               _____  ___   ___   ___  ");
+        System.out.println("   / \\   __| |_   ____ _ _ __   ___ ___  __| |  / ___|__ _| | ___ _   _| | __ _| |_ ___  _ __  |___ / / _ \\ / _ \\ / _ \\ ");
+        System.out.println("  / _ \\ / _` \\ \\ / / _` | '_ \\ / __/ _ \\/ _` | | |   / _` | |/ __| | | | |/ _` | __/ _ \\| '__|   |_ \\| | | | | | | | | |");
+        System.out.println(" / ___ \\ (_| |\\ V / (_| | | | | (_|  __/ (_| | | |__| (_| | | (__| |_| | | (_| | || (_) | |     ___) | |_| | |_| | |_| |");
+        System.out.println("/_/   \\_\\__,_| \\_/ \\__,_|_| |_|\\___\\___|\\__,_|  \\____\\__,_|_|\\___|\\__,_|_|\\__,_|\\__\\___/|_|    |____/ \\___/ \\___/ \\___/ ");
+        System.out.println("************************************************************************************************************************");
+        System.out.println("");
+        
         // Calculator selection loop
         {
             char userChar = '\0';
             while (userChar != 'q')
             {
+                System.out.println("Choose a calculator based on what kind of math you want to do: ");
                 PrintCalculatorsMenu();
                 
                 userChar = scanner.next().charAt(0);
@@ -79,7 +89,17 @@ public class Program
                     }
                 }
             }
+            
+            
+            System.out.println("Thank you for using " + GetProgramName() + " !!!");
+            System.out.println("Come back again later!");
+            
         }
+    }
+    
+    public static String GetProgramName()
+    {
+        return "Advanced Calculator 3000";
     }
     
     public static void PrintCalculatorsMenu()

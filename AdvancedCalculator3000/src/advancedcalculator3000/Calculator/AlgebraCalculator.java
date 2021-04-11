@@ -63,7 +63,7 @@ public class AlgebraCalculator implements ICalculator
     @Override
     public void InitialUserMenu(Scanner scanner)
     {
-        EnterQuadraticMenu(scanner);
+        PromptForQuadratic(scanner);
     }
     
     @Override
@@ -109,7 +109,7 @@ public class AlgebraCalculator implements ICalculator
                 break;
             
             case 'n':
-                InitialUserMenu(scanner); // this is temporary
+                PromptForQuadratic(scanner);
                 break;
             
             case 'h':
@@ -118,7 +118,7 @@ public class AlgebraCalculator implements ICalculator
         }
     }
     
-    public void EnterQuadraticMenu(Scanner scanner)
+    public void PromptForQuadratic(Scanner scanner)
     {
         System.out.println("Enter a quadratic to perform algebra on:");
         System.out.print("f(x) = ");

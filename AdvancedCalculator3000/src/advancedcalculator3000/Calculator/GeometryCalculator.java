@@ -44,10 +44,87 @@ public class GeometryCalculator implements ICalculator
     @Override
     public void InitialUserMenu(Scanner scanner)
     {
+        PromptForNewShape(scanner);
+    }
+    
+    @Override
+    public void PrintUserMenu()
+    {
+        System.out.println("'v' - Volume of " + shape.toString().toLowerCase());
+        System.out.println("'a' - Surface area of " + shape.toString().toLowerCase());
+        System.out.println("'n' - New shape");
+        System.out.println("'h' - Help");
+    }
+    @Override
+    public void HandleUserMenu(Scanner scanner, char userSelection)
+    {
+        switch (userSelection)
+        {
+            case 'v':
+                switch (shape)
+                {
+                    case SHAPE_Box:
+                        System.out.println("The volume of your " + shape.toString().toLowerCase() + " is: " + VolumeOfBox());
+                        break;
+                    case SHAPE_Sphere:
+                        System.out.println("The volume of your " + shape.toString().toLowerCase() + " is: " + VolumeOfSphere());
+                        break;
+                    case SHAPE_Cone:
+                        System.out.println("The volume of your " + shape.toString().toLowerCase() + " is: " + VolumeOfCone());
+                        break;
+                        
+                    default:
+                        break;
+                }
+                break;
+            case 'a':
+                switch (shape)
+                {
+                    case SHAPE_Box:
+                        System.out.println("The surface area of your " + shape.toString().toLowerCase() + " is: " + SurfaceAreaOfBox());
+                        break;
+                    case SHAPE_Sphere:
+                        System.out.println("The surface area of your " + shape.toString().toLowerCase() + " is: " + SurfaceAreaOfSphere());
+                        break;
+                    case SHAPE_Cone:
+                        System.out.println("The surface area of your " + shape.toString().toLowerCase() + " is: " + SurfaceAreaOfCone());
+                        break;
+                        
+                    default:
+                        break;
+                }
+                break;
+            case 'n':
+                PromptForNewShape(scanner);
+                break;
+            case 'h':
+                PrintHelpMenu();
+                break;
+                
+            default:
+                break;
+        }
+    }
+    
+    private void PrintShapesMenu()
+    {
+        for (EShape shape : EShape.values())
+        {
+            if (shape == EShape.SHAPE_None)
+            {
+                continue;
+            }
+            
+            System.out.println("'" + EShape.GetShapeCharacter(shape) + "' - " + shape.toString());
+        }
+    }
+    private void PromptForNewShape(Scanner scanner)
+    {
         System.out.println("Choose a shape to perform geometry on:");
         PrintShapesMenu();
         
         final char userShapeSelection = scanner.next().charAt(0);
+        
         shape = EShape.GetShapeByCharacter(userShapeSelection);
         
         switch (shape)
@@ -99,86 +176,11 @@ public class GeometryCalculator implements ICalculator
         }
     }
     
-    @Override
-    public void PrintUserMenu()
+    private void PrintHelpMenu()
     {
-        System.out.println("'v' - Volume of " + shape.toString().toLowerCase());
-        System.out.println("'s' - Surface area of " + shape.toString().toLowerCase());
-        System.out.println("'n' - New shape");
-        System.out.println("'h' - Help");
-    }
-    @Override
-    public void HandleUserMenu(Scanner scanner, char userSelection)
-    {
-        switch (shape)
-        {
-            case SHAPE_Box:
-                
-                switch (userSelection)
-                {
-                    case 'v':
-                        System.out.println("The volume of your " + shape.toString().toLowerCase() + " is: " + VolumeOfBox());
-                        break;
-                    case 's':
-                        System.out.println("The surface area of your " + shape.toString().toLowerCase() + " is: " + SurfaceAreaOfBox());
-                        break;
-                        
-                    default:
-                        break;
-                }
-                
-                break;
-            case SHAPE_Sphere:
-                
-                switch (userSelection)
-                {
-                    case 'v':
-                        System.out.println("The volume of your " + shape.toString().toLowerCase() + " is: " + VolumeOfSphere());
-                        break;
-                    case 's':
-                        System.out.println("The surface area of your " + shape.toString().toLowerCase() + " is: " + SurfaceAreaOfSphere());
-                        break;
-                        
-                    default:
-                        break;
-                }
-                
-                break;
-            case SHAPE_Cone:
-                
-                switch (userSelection)
-                {
-                    case 'v':
-                        System.out.println("The volume of your " + shape.toString().toLowerCase() + " is: " + VolumeOfCone());
-                        break;
-                    case 's':
-                        System.out.println("The surface area of your " + shape.toString().toLowerCase() + " is: " + SurfaceAreaOfCone());
-                        break;
-                        
-                    default:
-                        break;
-                }
-                
-                break;
-                
-                
-            default:
-                break;
-        }
+        
     }
     
-    private void PrintShapesMenu()
-    {
-        for (EShape shape : EShape.values())
-        {
-            if (shape == EShape.SHAPE_None)
-            {
-                continue;
-            }
-            
-            System.out.println("'" + EShape.GetShapeCharacter(shape) + "' - " + shape.toString());
-        }
-    }
     
     
     private double VolumeOfBox()

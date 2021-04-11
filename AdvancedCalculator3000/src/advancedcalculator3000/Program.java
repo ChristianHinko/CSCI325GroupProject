@@ -52,6 +52,8 @@ public class Program
                 System.out.println("Choose a calculator based on what kind of math you want to do: ");
                 PrintCalculatorsMenu();
                 
+                System.out.println("");
+                System.out.print("Choose a calculator: ");
                 userChar = scanner.next().charAt(0);
                 scanner.nextLine();
                 userChar = Character.toLowerCase(userChar); // ensure lower case so that upper case inputs work as well

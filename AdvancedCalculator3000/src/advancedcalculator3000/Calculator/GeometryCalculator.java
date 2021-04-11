@@ -17,12 +17,16 @@ public class GeometryCalculator implements ICalculator
 {
     private EShape shape;
     
-    private double shapeLength;
-    private double shapeWidth;
-    private double shapeHeight;
+    private double boxLength;
+    private double boxWidth;
+    private double boxHeight;
     
-    private double shapeRadius;
+    private double sphereRadius;
     
+    private double coneAngle;
+    private double coneRadius;
+    private double coneHeight;
+    private double coneSideLength;
     
     
     public GeometryCalculator()
@@ -49,30 +53,43 @@ public class GeometryCalculator implements ICalculator
         switch (shape)
         {
             case SHAPE_Box:
-                System.out.print("Enter the length of your box: ");
-                final double userLength = scanner.nextDouble();
+                System.out.print("Enter the length of your " + shape.toString().toLowerCase() + ": ");
+                final double userBoxLength = scanner.nextDouble();
                 
-                System.out.print("Enter the width of your box: ");
-                final double userWidth = scanner.nextDouble();
+                System.out.print("Enter the width of your " + shape.toString().toLowerCase() + ": ");
+                final double userBoxWidth = scanner.nextDouble();
                 
-                System.out.print("Enter the height of your box: ");
-                final double userHeight = scanner.nextDouble();
+                System.out.print("Enter the height of your " + shape.toString().toLowerCase() + ": ");
+                final double userBoxHeight = scanner.nextDouble();
                 
-                shapeLength = userLength;
-                shapeWidth = userWidth;
-                shapeHeight = userHeight;
+                
+                boxLength = userBoxLength;
+                boxWidth = userBoxWidth;
+                boxHeight = userBoxHeight;
                 
                 break;
                 
             case SHAPE_Sphere:
-                System.out.print("Enter the radius of your sphere: ");
-                final double userRadius = scanner.nextDouble();
+                System.out.print("Enter the radius of your " + shape.toString().toLowerCase() + ": ");
+                final double userSphereRadius = scanner.nextDouble();
                 
-                shapeRadius = userRadius;
+                sphereRadius = userSphereRadius;
                 
                 break;
                 
             case SHAPE_Cone:
+                System.out.print("Enter the angle of your " + shape.toString().toLowerCase() + ": ");
+                final double userConeAngle = scanner.nextDouble();
+                
+                System.out.print("Enter the height of your " + shape.toString().toLowerCase() + ": ");
+                final double userConeHeight = scanner.nextDouble();
+                
+                
+                coneAngle = (Math.PI/180) * userConeAngle;
+                coneHeight = userConeHeight;
+                
+                coneSideLength = 1 / (Math.cos(coneAngle) * coneHeight);
+                coneRadius = coneSideLength * Math.sin(coneAngle);
                 
                 break;
                 
@@ -85,22 +102,10 @@ public class GeometryCalculator implements ICalculator
     @Override
     public void PrintUserMenu()
     {
-        switch (shape)
-        {
-            case SHAPE_Box:
-                
-                break;
-            case SHAPE_Sphere:
-                
-                break;
-            case SHAPE_Cone:
-                
-                break;
-                
-                
-            default:
-                break;
-        }
+        System.out.println("'v' - Volume of " + shape.toString().toLowerCase());
+        System.out.println("'s' - Surface area of " + shape.toString().toLowerCase());
+        System.out.println("'n' - New shape");
+        System.out.println("'h' - Help");
     }
     @Override
     public void HandleUserMenu(Scanner scanner, char userSelection)
@@ -109,11 +114,50 @@ public class GeometryCalculator implements ICalculator
         {
             case SHAPE_Box:
                 
+                switch (userSelection)
+                {
+                    case 'v':
+                        VolumeOfBox();
+                        break;
+                    case 's':
+                        SurfaceAreaOfBox();
+                        break;
+                        
+                    default:
+                        break;
+                }
+                
                 break;
             case SHAPE_Sphere:
                 
+                switch (userSelection)
+                {
+                    case 'v':
+                        VolumeOfSphere();
+                        break;
+                    case 's':
+                        SurfaceAreaOfSphere();
+                        break;
+                        
+                    default:
+                        break;
+                }
+                
                 break;
             case SHAPE_Cone:
+                
+                switch (userSelection)
+                {
+                    case 'v':
+                        VolumeOfCone();
+                        break;
+                    case 's':
+                        SurfaceAreaOfCone();
+                        break;
+                        
+                    default:
+                        break;
+                }
                 
                 break;
                 
@@ -139,23 +183,38 @@ public class GeometryCalculator implements ICalculator
     
     private double VolumeOfBox()
     {
-        return (shapeLength * shapeWidth * shapeHeight);
+        return (boxLength * boxWidth * boxHeight);
     }
     private double SurfaceAreaOfBox()
     {
-        final double areaLW = shapeLength * shapeWidth;
-        final double areaWH = shapeWidth * shapeHeight;
-        final double areaHL = shapeHeight * shapeLength;
+        final double areaLW = boxLength * boxWidth;
+        final double areaWH = boxWidth * boxHeight;
+        final double areaHL = boxHeight * boxLength;
         
         return 2 * (areaLW + areaWH + areaHL);
     }
     
     private double VolumeOfSphere()
     {
-        return (4/3) * (Math.PI * Math.pow(shapeRadius, 3));
+        return (4/3) * (Math.PI * Math.pow(sphereRadius, 3));
     }
     private double SurfaceAreaOfSphere()
     {
-        return 4 * (Math.PI * Math.pow(shapeRadius, 2));
+        return 4 * AreaOfCircle(sphereRadius);
+    }
+    
+    private double VolumeOfCone()
+    {
+        return AreaOfCircle(coneRadius) * (coneHeight / 3);
+    }
+    private double SurfaceAreaOfCone()
+    {
+        return (Math.PI * coneRadius) * (coneRadius + Math.sqrt(Math.pow(coneHeight, 2) + Math.pow(coneRadius, 2)));
+    }
+    
+    
+    private static double AreaOfCircle(double radius)
+    {
+        return (Math.PI * Math.pow(radius, 2));
     }
 }

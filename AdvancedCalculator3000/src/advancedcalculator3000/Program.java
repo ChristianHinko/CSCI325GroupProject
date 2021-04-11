@@ -89,6 +89,6 @@ public class Program
         System.out.println("'g' - " + GeometryCalculator.GetCalculatorName());
         System.out.println("'t' - " + TrigonometricCalculator.GetCalculatorName());
         System.out.println("");
-        System.out.println("'q' - Quit");
+        System.out.println("'q' - Quit application");
     }
 }
